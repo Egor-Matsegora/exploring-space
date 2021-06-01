@@ -1,0 +1,32 @@
+@import '~normalize-scss/sass/normalize'
+@include normalize()
+
+@import '@/assets/styles/fonts'
+
+html
+  min-height: 100%
+  font-family: $font-family-base
+  font-weight: $font-weight-regular
+  font-size: 16px
+  color: $color-text-secondary
+
+body
+  +full-height()
+
+.app
+  +full-height()
+  display: flex
+  flex-direction: column
+
+.app__wrapper
+  flex-grow: 1
+  display: flex
+  flex-direction: column
+  background-color: $color-background-medium
+
+.app__header,
+.app__footer
+  flex: 0 0 auto
+
+.app__content
+  flex: 1 0 auto

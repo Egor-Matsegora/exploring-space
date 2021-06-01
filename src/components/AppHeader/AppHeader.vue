@@ -12,7 +12,7 @@ import Logo from '@/components/Logo/Logo.vue';
 import HeaderNav from '@/components/HeaderNav/HeaderNav.vue';
 
 export default Vue.extend({
-  name: 'app-header',
+  name: 'AppHeader',
   components: {
     Logo,
     HeaderNav

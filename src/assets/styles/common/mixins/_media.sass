@@ -1,10 +1,10 @@
 
 
 // Media queries
-@mixin max-w($resolution)
-  @media screen and (max-width: $resolution px)
+=max-w($resolution)
+  @media screen and (max-width: #{$resolution}px)
     @content
 
-@mixin min-w($resolution)
-  @media screen and (min-width: $resolution px)
+=min-w($resolution)
+  @media screen and (min-width: #{$resolution}px)
     @content

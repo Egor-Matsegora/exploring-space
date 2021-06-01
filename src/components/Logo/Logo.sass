@@ -5,10 +5,20 @@
   align-items: center
   height: 60px
 
+  +max-w($tablet)
+    height: 50px
+
 .app-logo__icon
   margin-right: 30px
   height: 100%
 
+  +max-w($tablet)
+    margin-right: 20px
+
 .app-logo__text
   font-size: 2em
   font-weight: $font-weight-bold
+  color: $color-text-primary
+
+  +max-w($tablet)
+    font-size: 1.8em

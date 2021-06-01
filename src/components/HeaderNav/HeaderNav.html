@@ -1,0 +1,40 @@
+<nav class="app-nav">
+  <ul
+    class="app-nav__list"
+    :class="{'app-nav__list--open': isMenuOpen}"
+  >
+    <li class="app-nav__link-holder">
+      <router-link
+        to="/"
+        exact
+        class="app-nav__link"
+        active-class="app-nav__link--active"
+      >Home</router-link>
+    </li>
+    <li class="app-nav__link-holder">
+      <router-link
+        to="/earth-observation"
+        class="app-nav__link"
+        active-class="app-nav__link--active"
+      >Earth Observation</router-link>
+    </li>
+    <li class="app-nav__link-holder">
+      <router-link
+        to="/mars-rovers"
+        class="app-nav__link"
+        active-class="app-nav__link--active"
+      >Mars Rovers</router-link>
+    </li>
+  </ul>
+  <div
+    class="app-nav__menu-btn"
+    :class="{'app-nav__menu-btn--open': isMenuOpen}"
+    @click="changeOpenFlag"
+  >
+    <img
+      class="app-nav__icon"
+      src="@/assets/img/common/spaceman.svg"
+      alt="menu"
+    >
+  </div>
+</nav>

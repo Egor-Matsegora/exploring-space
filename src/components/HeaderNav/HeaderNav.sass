@@ -1,0 +1,69 @@
+.app-nav
+  height: 100%
+  position: relative
+
+.app-nav__list
+  list-style-type: none
+  display: flex
+  height: 100%
+  margin: 0
+  padding: 0
+  transition: $transition-base
+
+  +max-w($tablet)
+    position: absolute
+    top: 100%
+    right: -30px
+    flex-direction: column
+    padding: 20px 0
+    background-color: $color-background-light
+    transform: translateX(500px)
+    height: max-content
+
+    &--open
+      transform: translateX(0)
+
+.app-nav__link
+  display: flex
+  align-items: center
+  height: 100%
+  padding: 0 15px
+  opacity: 0.5
+  vertical-align: middle
+  transition: $transition-base
+  color: $color-text-primary
+  text-decoration: none
+  font-size: 1.4em
+  font-weight: $font-weight-medium
+  white-space: nowrap
+
+  &:hover
+    background-color: rgba(90, 90, 90, 0.1)
+    opacity: 1
+
+  &--active
+    opacity: 1
+
+  +max-w($tablet)
+    height: 50px
+
+.app-nav__menu-btn
+  display: none
+  transition: $transition-base
+
+  +max-w($tablet)
+    cursor: pointer
+    display: flex
+    align-items: center
+    opacity: 0.5
+    height: 100%
+    padding: 0 10px
+
+    &:hover,
+    &--open
+      opacity: 0.8
+
+.app-nav__icon
+  display: block
+  height: 40px
+  width: auto

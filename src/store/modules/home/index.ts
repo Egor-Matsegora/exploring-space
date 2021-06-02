@@ -5,7 +5,7 @@ import { THomeState } from './types';
 import { mutations } from './mutations';
 import { actions } from './actions';
 
-export const homeStore: Module<THomeState, TRootState> = {
+export const home: Module<THomeState, TRootState> = {
   state: () => ({
     mainSliderData: [],
     mainSliderLoading: false,

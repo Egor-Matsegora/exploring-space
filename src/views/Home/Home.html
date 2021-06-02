@@ -1,2 +1,28 @@
 <div class="home">
+  <div class="home__slider-holder">
+
+    <swiper
+      :options="swiperOptions"
+      class="home__slider"
+      v-if="mainSliderData.length && !mainSliderLoading"
+      ref="swiperRef"
+    >
+      <swiper-slide v-for="slide in mainSliderData">
+        <img :src="slide.url" :alt="slide.title" class="home__slide-image"/>
+      </swiper-slide>
+    </swiper>
+
+    <div class="home__slider-footer">
+      <button
+        class="home__reload"
+        @click="fetchMainSliderData()"
+        :disabled="mainSliderLoading"
+      >
+        see another images
+      </button>
+    </div>
+  </div>
+  <div class="container home__container">
+
+  </div>
 </div>

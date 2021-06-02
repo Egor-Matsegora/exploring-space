@@ -1,13 +1,10 @@
-import { IMainSliderData } from '@/views/Home/interfaces/IMainSliderData';
-import { Observable } from 'rxjs/internal/Observable';
+import { Subscribable, Observable } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
-import { tap } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
+import { MAIN_SLIDER_API } from '@/constants';
 
-const API_KEY = 'DEMO_KEY';
-const MAIN_SLIDER_API = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&count=5`;
-
-export class Api {
-  // public getDataForMainSlider(): Observable<IMainSliderData[] | IMainSliderData> {
-    // return ajax.getJSON(MAIN_SLIDER_API).pipe(tap(console.log))
-  // }
+export const api = {
+  getDataForMainSlider<T>(): Subscribable<T> {
+    return ajax.getJSON<T>(MAIN_SLIDER_API).pipe(map(res => res), tap(console.info));
+  }
 }

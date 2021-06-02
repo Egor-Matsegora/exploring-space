@@ -3,18 +3,15 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Api } from "@/api";
+import { mapActions } from "vuex";
 
 export default Vue.extend({
   name: "Home",
-  data() {
-    return {
-      api: new Api()
-    }
+  methods: {
+    ...mapActions(['fetchMainSliderDataWithStorage'])
   },
-  methods: {},
   created() {
-    // this.api.getDataForMainSlider().subscribe();
+    this.fetchMainSliderDataWithStorage();
   }
 });
 </script>

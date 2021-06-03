@@ -8,21 +8,45 @@
       ref="swiperRef"
     >
       <swiper-slide v-for="slide in mainSliderData">
-        <img :src="slide.url" :alt="slide.title" class="home__slide-image"/>
+        <div class="home__slide slide">
+          <div class="slide__img-holder">
+            <img
+              :src="slide.url"
+              :alt="slide.title"
+              :title="slide.explanation"
+              class="slide__img"
+            />
+          </div>
+          <div class="slide__text container-unscoped">
+            <h2 class="slide__title">
+              {{ slide.title }}
+            </h2>
+            <p class="slide__description">
+              {{ slide.explanation }}
+            </p>
+          </div>
+        </div>
       </swiper-slide>
     </swiper>
 
-    <div class="home__slider-footer">
+    <div class="home__loader" v-if="mainSliderLoading">
+      <div class="home__loader-holder">
+        <loader/>
+      </div>
+    </div>
+
+    <div class="home__slider-footer container-unscoped">
       <button
         class="home__reload"
         @click="fetchMainSliderData()"
         :disabled="mainSliderLoading"
       >
         see another images
+        <i class="home__reload-icon"></i>
       </button>
     </div>
   </div>
-  <div class="container home__container">
+  <div class="container-unscoped home__container">
 
   </div>
 </div>

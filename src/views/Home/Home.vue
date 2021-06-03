@@ -11,7 +11,7 @@ import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 import SwiperCore, { EffectFade, Navigation, Pagination, SwiperOptions } from 'swiper/core';
 
 import { TRootState } from "@/store/types";
-import { TimeInterval } from "rxjs";
+import Loader from "@/components/Loader/Loader.vue";
 
 SwiperCore.use([EffectFade, Navigation, Pagination]);
 
@@ -19,7 +19,8 @@ export default Vue.extend({
   name: "Home",
   components: {
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    Loader
   },
   data() {
     return {
@@ -28,7 +29,7 @@ export default Vue.extend({
         effect: 'fade',
         loop: true
       } as SwiperOptions,
-      swiperInterval: 10000
+      swiperInterval: 20000
     }
   },
   methods: {

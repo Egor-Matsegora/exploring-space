@@ -1,10 +1,94 @@
 .home__slider
-  height: 600px
+  height: calc(100vh - 200px)
 
-.home__slide-image
+  +max-w(tablet)
+    height: calc( 100vh - 175px )
+
+.slide
+  background-color: $color-background-medium
+  align-self: stretch
+  height: calc(100vh - 200px)
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  +max-w(tablet)
+    height: calc( 100vh - 175px )
+
+.slide__img-holder
+  flex: 0 1 60%
+  max-height: 70%
+  align-self: stretch
+
+.slide__img
   display: block
   width: 100%
   height: 100%
-  object-position: top center
+  object-position: center
   object-fit: contain
-  background-color: $color-background-medium
+
+.slide__text
+  flex: 1 1 30%
+  max-height: 30%
+  padding-top: 50px
+
+.slide__title
+  text-align: center
+  margin-top: 0
+  margin-bottom: 30px
+
+.slide__description
+  margin: 0
+  +line-clamp(5)
+
+.home__slider-footer
+  margin: 25px 0
+  display: flex
+  justify-content: center
+
+.home__reload
+  min-width: 250px
+  height: 50px
+  text-align: center
+  border-radius: 0
+  border: 2px solid $color-text-primary
+  background-color: transparent
+  color: $color-text-primary
+  opacity: 0.6
+  transition: $transition-base
+  text-transform: uppercase
+  font-size: 20px
+  padding: 0 20px
+  cursor: pointer
+  display: inline-flex
+  justify-content: center
+  align-items: center
+
+  &:hover
+    opacity: 1
+
+.home__reload-icon
+  display: inline-block
+  width: 30px
+  height: 30px
+  margin-left: 20px
+  background: url('../../assets/img/common/refresh.svg') center no-repeat
+  background-size: contain
+
+.home__loader
+  height: calc(100vh - 200px)
+  display: flex
+  justify-content: center
+  align-items: center
+
+  +max-w(tablet)
+    height: calc( 100vh - 175px )
+
+.home__loader-holder
+  width: 150px
+  height: 150px
+  margin: 0 auto
+
+  +max-w(tablet)
+    width: 100px
+    height: 100px

@@ -10,7 +10,7 @@ import { THomeState,  } from "../types";
 
 export const actions: ActionTree<THomeState, TRootState> = {
 
-  fetchMainSliderData({ commit }, dateNow: string): Promise<TMainSliderResponse> {
+  fetchMainSliderData({ commit, rootState }, dateNow: string): Promise<TMainSliderResponse> {
 
     commit(homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER);
 
@@ -33,7 +33,8 @@ export const actions: ActionTree<THomeState, TRootState> = {
       }
 
       // утверждение типа добавлено для адекватного срабатывания нужной перегрузки
-      api.getDataForMainSlider<TMainSliderResponse>().subscribe(observer as Observer<TMainSliderResponse>);
+      const subscription = api.getDataForMainSlider<TMainSliderResponse>().subscribe(observer as Observer<TMainSliderResponse>);
+      rootState.subscriptions.push(subscription);
     })
   },
 

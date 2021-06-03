@@ -1,5 +1,5 @@
 import { ActionTree } from "vuex";
-import { Observer } from "rxjs";
+import { Observer, Unsubscribable } from "rxjs";
 
 import { api } from '@/api';
 import { TRootState } from '@/store/types';
@@ -13,7 +13,7 @@ import { IObservationImageFormData } from '@/views/Observation/interfaces/Observ
 
 export const actions: ActionTree<TObservationState, TRootState> = {
   fetchObservationImage(
-    {commit},
+    {commit, rootState},
     imageFormData: IObservationImageFormData
   ): Promise<TObservationImageResponse> {
     commit(observationMutationTypes.FETCH_OBSERVATION_IMAGE);
@@ -35,7 +35,9 @@ export const actions: ActionTree<TObservationState, TRootState> = {
         }
       }
 
-      api.getObservationImageData<TObservationImageResponse>(imageFormData).subscribe(observer as Observer<TObservationImageResponse>);
+      const subscription: Unsubscribable = api.getObservationImageData<TObservationImageResponse>(imageFormData)
+        .subscribe(observer as Observer<TObservationImageResponse>);
+      rootState.subscriptions.push(subscription);
     })
   }
 }

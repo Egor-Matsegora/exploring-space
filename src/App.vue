@@ -9,9 +9,17 @@
 import Vue from 'vue';
 import AppHeader from '@/components/AppHeader/AppHeader.vue';
 
+import { mapActions } from 'vuex';
+
 export default Vue.extend({
   components: {
     AppHeader
+  },
+  methods: {
+    ...mapActions(['unsubscribeAll'])
+  },
+  beforeDestroy() {
+    this.unsubscribeAll();
   }
 })
 </script>

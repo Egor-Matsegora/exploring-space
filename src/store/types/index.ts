@@ -1,1 +1,3 @@
-export type TRootState = {[key: string]: any};
+import { Unsubscribable } from "rxjs";
+
+export type TRootState = {[key: string]: any, subscriptions: Unsubscribable[]};

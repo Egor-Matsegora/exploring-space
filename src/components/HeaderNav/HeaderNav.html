@@ -5,7 +5,7 @@
   >
     <li class="app-nav__link-holder">
       <router-link
-        to="/"
+        :to="{ name: 'home' }"
         exact
         class="app-nav__link"
         active-class="app-nav__link--active"
@@ -13,7 +13,7 @@
     </li>
     <li class="app-nav__link-holder">
       <router-link
-        to="/earth-observation"
+        :to="{ name: 'observation' }"
         class="app-nav__link"
         active-class="app-nav__link--active"
       >Earth Observation</router-link>

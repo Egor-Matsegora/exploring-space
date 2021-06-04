@@ -41,7 +41,7 @@
       <div class="obs-form__field">
         <label :for="`dim--${id}`" class="obs-form__label">
           Dim
-          <span class="obs-form__info"> (number from 0.1 to 0.4) </span>
+          <span class="obs-form__info"> (number from 0.1 to 0.9) </span>
         </label>
         <input
           type="text"
@@ -64,6 +64,7 @@
           class="obs-form__input"
           :class="{ 'obs-form__input--error': $v.date.$error }"
           :id="`date--${id}`"
+          :max="maxDate"
           v-model="date"
         >
         <div class="obs-form__error" v-if="$v.date.$error">

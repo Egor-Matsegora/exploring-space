@@ -1,0 +1,85 @@
+<div class="observation">
+  <aside class="observation__filter">
+    <form @submit.prevent="handleFormSubmit()" class="observation__form obs-form">
+      <div class="obs-form__field">
+        <label :for="`latitude--${id}`" class="obs-form__label">
+          Latitude
+          <span class="obs-form__info"> (number from 90 to -90) </span>
+        </label>
+        <input
+          type="text"
+          :id="`latitude--${id}`"
+          class="obs-form__input"
+          v-model="latitude"
+        >
+      </div>
+
+      <div class="obs-form__field">
+        <label :for="`longtitude--${id}`" class="obs-form__label">
+          Longtitude
+          <span class="obs-form__info"> (number from 180 to -180) </span>
+        </label>
+        <input
+          type="text"
+          class="obs-form__input"
+          :id="`longtitude--${id}`"
+          v-model="longtitude"
+        >
+      </div>
+
+      <div class="obs-form__field">
+        <label :for="`dim--${id}`" class="obs-form__label">
+          Dim
+          <span class="obs-form__info"> (number from 0.1 to 0.4) </span>
+        </label>
+        <input
+          type="text"
+          class="obs-form__input"
+          :id="`dim--${id}`"
+          v-model="dim"
+        >
+      </div>
+
+      <div class="obs-form__field">
+        <label :for="`dim--${id}`" class="obs-form__label">
+          Date
+        </label>
+        <input
+          type="date"
+          :id="`date--${id}`"
+          class="obs-form__input"
+          v-model="date"
+        >
+      </div>
+
+      <div class="obs-form__field">
+        <button
+          type="submit"
+          class="obs-form__submit"
+          :disabled="loading"
+        >Get image</button>
+      </div>
+    </form>
+  </aside>
+
+  <section class="observation__content">
+    <div class="observation__loader" v-if="loading">
+      <div class="observation__loader">
+        <loader />
+      </div>
+    </div>
+
+    <div class="observation__img-holder" v-if="imageData && !loading">
+      <img
+        :src="imageData"
+        alt="earth observation"
+        class="observation__img"
+      >
+    </div>
+
+    <div
+      class="observation__massage"
+      v-if="!imageData && !loading && notExistsMessage"
+    >{{ notExistsMessage }}</div>
+  </section>
+</div>

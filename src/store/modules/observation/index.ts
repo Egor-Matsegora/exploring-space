@@ -1,9 +1,9 @@
-import { mutations } from './mutations';
+import { Module } from 'vuex';
+
 import { TRootState } from '@/store/types';
-import { Module } from "vuex";
-import { TObservationState } from "./types";
-
-
+import { TObservationState } from './types';
+import { actions } from './actions';
+import { mutations } from './mutations';
 
 export const observation: Module<TObservationState, TRootState> = {
   state: {
@@ -12,5 +12,5 @@ export const observation: Module<TObservationState, TRootState> = {
     observationLoading: false,
   },
   mutations,
-  actions: {},
-}
+  actions,
+};

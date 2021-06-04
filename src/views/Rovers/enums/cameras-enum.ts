@@ -1,0 +1,11 @@
+export enum CamerasEnum {
+  FRONT_HAZARD_AVOIDANCE_CAMERA = 'fhaz',
+  REAR_HAZARD_AVIODANCE_CAMERA = 'rhaz',
+  MAST_CAMERA = 'mast',
+  CHEMISTRY_AND_CAMERA_COMPLEX = 'chemcam',
+  MARS_HAND_LENS_IMAGER = 'mahli',
+  MARS_DESERT_IMAGER = 'mardi',
+  NAVIGATION_CAMERA = 'navcam',
+  PANORAMIC_CAMERA = 'pancam',
+  MINIATURE_TERMINAL_EMISSION_SPECTROMETER = 'minites',
+}

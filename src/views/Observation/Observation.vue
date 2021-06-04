@@ -5,7 +5,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { mapActions, mapState } from 'vuex';
-import { required, between } from 'vuelidate/lib/validators';
+import { required, between, numeric, or, decimal } from 'vuelidate/lib/validators';
 import { v4 as uuid } from 'uuid';
 
 import { TObservationState } from '@/store/modules/observation/types';
@@ -29,9 +29,10 @@ export default Vue.extend({
     };
   },
   validations: {
-    longtitude: { required, between: between(-180, 180) },
-    latitude: { required, between: between(-90, 90) },
-    dim: { required, between: between(-0.1, 0.4) },
+    longtitude: { required, between: between(-180, 180), or: or(decimal, numeric) },
+    latitude: { required, between: between(-90, 90), or: or(decimal, numeric) },
+    dim: { required, between: between(0.1, 0.4), decimal },
+    date: { required },
   },
   computed: {
     ...mapState({

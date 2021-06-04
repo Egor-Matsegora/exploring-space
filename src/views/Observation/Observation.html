@@ -1,6 +1,9 @@
-<div class="observation">
+<div class="observation container-unscoped">
   <aside class="observation__filter">
     <form @submit.prevent="handleFormSubmit()" class="observation__form obs-form">
+      <h2 class="obs-form__heading">
+        Fill out the form to get an image
+      </h2>
       <div class="obs-form__field">
         <label :for="`latitude--${id}`" class="obs-form__label">
           Latitude
@@ -8,10 +11,14 @@
         </label>
         <input
           type="text"
-          :id="`latitude--${id}`"
           class="obs-form__input"
+          :class="{ 'obs-form__input--error': $v.latitude.$error }"
+          :id="`latitude--${id}`"
           v-model="latitude"
         >
+        <div class="obs-form__error" v-if="$v.latitude.$error">
+          field is invalid
+        </div>
       </div>
 
       <div class="obs-form__field">
@@ -22,9 +29,13 @@
         <input
           type="text"
           class="obs-form__input"
+          :class="{ 'obs-form__input--error': $v.longtitude.$error }"
           :id="`longtitude--${id}`"
           v-model="longtitude"
         >
+        <div class="obs-form__error" v-if="$v.longtitude.$error">
+          field is invalid
+        </div>
       </div>
 
       <div class="obs-form__field">
@@ -35,9 +46,13 @@
         <input
           type="text"
           class="obs-form__input"
+          :class="{ 'obs-form__input--error': $v.dim.$error }"
           :id="`dim--${id}`"
           v-model="dim"
         >
+        <div class="obs-form__error" v-if="$v.dim.$error">
+          field is invalid
+        </div>
       </div>
 
       <div class="obs-form__field">
@@ -46,10 +61,14 @@
         </label>
         <input
           type="date"
-          :id="`date--${id}`"
           class="obs-form__input"
+          :class="{ 'obs-form__input--error': $v.date.$error }"
+          :id="`date--${id}`"
           v-model="date"
         >
+        <div class="obs-form__error" v-if="$v.date.$error">
+          field is invalid
+        </div>
       </div>
 
       <div class="obs-form__field">
@@ -64,7 +83,7 @@
 
   <section class="observation__content">
     <div class="observation__loader" v-if="loading">
-      <div class="observation__loader">
+      <div class="observation__loader-holder">
         <loader />
       </div>
     </div>

@@ -1,5 +1,104 @@
 .observation
   display: flex
+  padding-top: 50px
+
+  +max-w($tablet)
+    flex-direction: column
+    align-items: center
 
 .observation__filter
-  flex: 0 0 30%
+  flex-grow: 0
+  margin-right: 20px
+
+  +max-w($tablet)
+    margin-right: 0
+    margin-bottom: 50px
+    max-width: 450px
+
+.observation__content
+  flex-grow: 1
+
+  +max-w($tablet)
+    min-height: 30vh
+
+.observation__loader
+  height: 100%
+  display: flex
+  justify-content: center
+  align-items: center
+
+.observation__loader-holder
+  width: 150px
+  height: 150px
+
+.obs-form
+  width: 290px
+
+  +max-w($tablet)
+    width: 100%
+    min-width: 250px
+
+.obs-form__heading
+  margin: 0
+  margin-bottom: 20px
+  text-align: center
+
+.obs-form__field
+  display: flex
+  flex-direction: column
+
+  &:not(:last-child)
+    margin-bottom: 15px
+
+.obs-form__label
+  font-size: 1.1em
+  font-weight: $font-weight-regular
+  margin-bottom: 5px
+
+.obs-form__info
+  display: block
+  font-size: 0.8em
+  font-weight: $font-weight-light
+
+.obs-form__input
+  display: block
+  width: 100%
+  height: 35px
+  color: $color-text-secondary
+  background-color: $color-background-lighten
+  border: 1px solid $color-background-light
+  border-radius: 0
+  outline: none
+  padding: 0 10px
+
+.obs-form__input--error
+  border-color: red
+
+.obs-form__submit
+  display: block
+  width: 100%
+  height: 50px
+  margin-top: 20px
+  border-radius: 0
+  border: 1px solid $color-text-secondary
+  color: $color-text-secondary
+  background-color: transparent
+  opacity: 0.8
+  transition: $transition-base
+  cursor: pointer
+
+  &:hover,
+  &:active
+    opacity: 1
+    border-color: $color-text-primary
+    color: $color-text-secondary
+
+  &:disabled
+    opacity: 0.4
+    cursor: not-alowed
+
+.obs-form__error
+  color: red
+  opacity: 0.8
+  font-size: 0.8em
+  margin-top: 5px

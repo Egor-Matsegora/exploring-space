@@ -1,4 +1,4 @@
-import { IRoverPhoto } from './../../../../views/Rovers/interfaces/rover-photo';
+import { IRoverPhoto } from '@/views/Rovers/interfaces/rover-photo';
 import { IRoverManifest } from '@/views/Rovers/interfaces/rover-manifest';
 
 export type TRoversState = {

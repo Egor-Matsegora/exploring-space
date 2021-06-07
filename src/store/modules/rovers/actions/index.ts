@@ -5,7 +5,7 @@ import { ActionTree } from 'vuex';
 import { api } from '@/api';
 import { IRoverManifest } from '@/views/Rovers/interfaces/rover-manifest';
 import { IRoverFormData } from '@/views/Rovers/interfaces/rover-form-data';
-import { roversMutationTypesEnum } from '../mutaions/mutation-types';
+import { roversMutationTypesEnum } from '../mutations/mutation-types';
 import { TRootState } from '@/store/types';
 import { TRoversState } from '../types';
 

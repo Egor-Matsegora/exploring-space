@@ -6,4 +6,5 @@ export const enum roversMutationTypesEnum {
   FILL_ROVER_IMAGES = 'fillRoverImages',
   FILL_ROVER_IMAGES_SUCCESS = 'fillRoverImagesSuccess',
   FILL_ROVER_IMAGES_ERROR = 'fillRoverImagesError',
+  SET_PAGE = 'setPage',
 }

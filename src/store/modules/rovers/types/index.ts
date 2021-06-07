@@ -8,4 +8,5 @@ export type TRoversState = {
   error: unknown | null;
   roverManifest: IRoverManifest | null;
   roverPhotos: IRoverPhoto[];
+  page: number;
 };

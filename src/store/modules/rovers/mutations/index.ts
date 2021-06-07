@@ -27,4 +27,7 @@ export const mutations: MutationTree<TRoversState> = {
     state.imagesLoading = true;
     state.roverPhotos = images;
   },
+  [roversMutationTypesEnum.SET_PAGE](state, page: number) {
+    state.page = page;
+  },
 };

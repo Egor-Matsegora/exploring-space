@@ -1,4 +1,4 @@
-import { IRoverPhoto } from './../../../../views/Rovers/interfaces/rover-photo';
+import { IRoverPhoto } from '@/views/Rovers/interfaces/rover-photo';
 import { Observer, Unsubscribable } from 'rxjs';
 import { ActionTree } from 'vuex';
 
@@ -44,5 +44,26 @@ export const actions: ActionTree<TRoversState, TRootState> = {
     }
 
     return dispatch('fetchRoverManifest');
+  },
+  fetchRoverPhotos({ commit, rootState }, data: IRoverFormData): Promise<IRoverPhoto[]> {
+    commit(roversMutationTypesEnum.FILL_ROVER_IMAGES);
+
+    return new Promise((resolve, reject) => {
+      const observer: Partial<Observer<IRoverPhoto[]>> = {
+        next(photos) {
+          commit(roversMutationTypesEnum.FILL_ROVER_IMAGES_SUCCESS, photos);
+          resolve(photos);
+        },
+        error(error) {
+          commit(roversMutationTypesEnum.FILL_ROVER_IMAGES_ERROR, error);
+          reject(error);
+        },
+      };
+
+      const subscription: Unsubscribable = api
+        .getRoverPhotos<IRoverPhoto[]>(data)
+        .subscribe(observer as Observer<IRoverPhoto[]>);
+      rootState.subscriptions.push(subscription);
+    });
   },
 };

@@ -1,6 +1,6 @@
-import { MutationTree } from "vuex";
+import { MutationTree } from 'vuex';
 
-import { homeStoreMutationTypes } from './mutationTypes';
+import { homeStoreMutationTypes } from './mutation-types';
 import { THomeState } from '../types/index';
 
 export const mutations: MutationTree<THomeState> = {
@@ -14,5 +14,5 @@ export const mutations: MutationTree<THomeState> = {
   [homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER_ERROR](state, err) {
     state.mainSliderLoading = false;
     state.error = err;
-  }
-}
+  },
+};

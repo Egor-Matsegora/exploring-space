@@ -1,23 +1,12 @@
 <ul class="rovers-nav">
-  <li class="rovers-nav__link-holder">
+  <li
+    class="rovers-nav__link-holder"
+    v-for="rover of rovers"
+  >
     <router-link
       class="rovers-nav__link"
       active-class="rovers-nav__link--active"
-      :to="{name: 'rover', params: {rover: 'curiosity'}}"
-    >curiosity</router-link>
-  </li>
-  <li class="rovers-nav__link-holder">
-    <router-link
-      class="rovers-nav__link"
-      active-class="rovers-nav__link--active"
-      :to="{name: 'rover', params: {rover: 'opportunity'}}"
-    >opportunity</router-link>
-  </li>
-  <li class="rovers-nav__link-holder">
-    <router-link
-      class="rovers-nav__link"
-      active-class="rovers-nav__link--active"
-      :to="{name: 'rover', params: {rover: 'spirit'}}"
-    >spirit</router-link>
+      :to="`/mars-rovers/${rover}`"
+    >{{ rover }}</router-link>
   </li>
 </ul>

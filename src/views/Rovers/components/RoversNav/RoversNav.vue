@@ -4,7 +4,14 @@
 <script lang="ts">
 import Vue from 'vue';
 
+import { RoversEnum } from '../../enums/rovers-enum';
+
 export default Vue.extend({
   name: 'RoversNav',
+  data() {
+    return {
+      rovers: Object.values(RoversEnum),
+    };
+  },
 });
 </script>

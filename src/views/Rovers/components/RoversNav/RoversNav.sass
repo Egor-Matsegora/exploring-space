@@ -1,0 +1,26 @@
+.rovers-nav
+  list-style-type: none
+  margin: 0
+  padding: 0
+  display: flex
+
+.rovers-nav__link
+  display: inline-block
+  min-width: 100px
+  padding: 10px 15px
+  background-color: $color-background-medium
+  text-align: center
+  text-decoration: none
+  color: transparentize($color-text-secondary, 0.3)
+  font-size: 1.2em
+  font-weight: $font-weight-regular
+  cursor: pointer
+  transition: $transition-base
+
+  &:hover
+    background-color: $color-background-light
+    color: $color-text-secondary
+
+.rovers-nav__link--active
+  background-color: $color-background-light
+  color: $color-text-primary

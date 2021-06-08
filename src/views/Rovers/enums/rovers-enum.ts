@@ -1,5 +1,5 @@
 export enum RoversEnum {
-  CURLIOSITY = 'curiosity',
+  CURIOSITY = 'curiosity',
   OPPORTUNITY = 'opportunity',
   SPIRIT = 'spirit',
 }

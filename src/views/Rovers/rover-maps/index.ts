@@ -3,7 +3,7 @@ import { RoversEnum } from './../enums/rovers-enum';
 
 export const roverMap: Readonly<Array<Readonly<{ [Value in RoversEnum]?: Array<string> }>>> = [
   {
-    [RoversEnum.CURLIOSITY]: [
+    [RoversEnum.CURIOSITY]: [
       CamerasEnum.FRONT_HAZARD_AVOIDANCE_CAMERA,
       CamerasEnum.REAR_HAZARD_AVIODANCE_CAMERA,
       CamerasEnum.MAST_CAMERA,

@@ -1,3 +1,4 @@
+import { RoversEnum } from '@/views/Rovers/enums/rovers-enum';
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 import Home from '../views/Home/Home.vue';
@@ -17,12 +18,11 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/mars-rovers',
-    name: 'rovers',
     component: () => import(/* webpackChunkName: "rovers" */ '../views/Rovers/Rovers.vue'),
     children: [
       {
         path: '',
-        redirect: 'curiocity',
+        redirect: RoversEnum.CURIOSITY,
       },
       {
         path: ':rover',

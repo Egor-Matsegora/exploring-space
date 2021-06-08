@@ -13,7 +13,7 @@ export const rovers: Module<TRoversState, TRootState> = {
     roverPhotos: [],
     roverManifest: null,
     error: null,
-    activeRover: RoversEnum.CURLIOSITY,
+    activeRover: RoversEnum.CURIOSITY,
     page: 1,
   },
   actions,

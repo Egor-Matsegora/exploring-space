@@ -20,7 +20,7 @@
     </li>
     <li class="app-nav__link-holder">
       <router-link
-        to="/mars-rovers"
+        :to="{name: 'rover', params: {rover: rover}}"
         class="app-nav__link"
         active-class="app-nav__link--active"
       >Mars Rovers</router-link>

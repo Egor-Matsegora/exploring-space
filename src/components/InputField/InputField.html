@@ -1,0 +1,16 @@
+<div class="input-field">
+  <label :for="id" class="input-field__label">
+    {{ label }}
+    <span class="input-field__info" v-if="info"> {{ info }} </span>
+  </label>
+  <input
+    :type="type"
+    class="input-field__input"
+    :class="{ 'input-field__input--error': error }"
+    :id="id"
+    v-model="value"
+  >
+  <div class="input-field__error" v-if="error">
+    field is invalid
+  </div>
+</div>

@@ -12,12 +12,14 @@ import { TObservationState } from '@/store/modules/observation/types';
 import { TRootState } from '@/store/types';
 
 import Loader from '@/components/Loader/Loader.vue';
+import InputField from '@/components/InputField/InputField.vue';
 import { IObservationImageFormData } from './interfaces/ObservationImageFormDataInterface';
 
 export default Vue.extend({
   name: 'Observation',
   components: {
     Loader,
+    InputField,
   },
   data() {
     return {

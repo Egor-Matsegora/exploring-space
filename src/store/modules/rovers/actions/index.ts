@@ -1,6 +1,7 @@
 import { IRoverPhoto } from '@/views/Rovers/interfaces/rover-photo';
 import { Observer, Unsubscribable } from 'rxjs';
 import { ActionTree } from 'vuex';
+import dayjs from 'dayjs';
 
 import { api } from '@/api';
 import { IRoverManifest } from '@/views/Rovers/interfaces/rover-manifest';
@@ -32,10 +33,15 @@ export const actions: ActionTree<TRoversState, TRootState> = {
     });
   },
   fetchRoverManifestWithStorage({ dispatch, commit, state }): Promise<IRoverManifest | unknown> {
+    const prevDate = dayjs().subtract(1, 'day').millisecond(0).second(0).second(0).minute(0).hour(0).valueOf();
+
     const activeRoverManifestFlag =
       localStorage.getItem(state.activeRover) &&
-      (JSON.parse(localStorage.getItem(state.activeRover) as string) as IRoverManifest).photo_manifest.status ===
-        'active';
+      ((JSON.parse(localStorage.getItem(state.activeRover) as string) as IRoverManifest).photo_manifest.status !==
+        'active' ||
+        dayjs(
+          (JSON.parse(localStorage.getItem(state.activeRover) as string) as IRoverManifest).photo_manifest.max_date
+        ).valueOf() === prevDate);
 
     if (activeRoverManifestFlag) {
       const storageManifest = JSON.parse(localStorage.getItem(state.activeRover) as string) as IRoverManifest;

@@ -26,11 +26,12 @@ export default Vue.extend({
   methods: {
     ...mapActions(['fetchRoverManifestWithStorage']),
   },
-  beforeRouteUpdate() {
+  beforeRouteUpdate(to, from, next) {
     this.fetchRoverManifestWithStorage();
+    next();
   },
   beforeMount() {
-    this.fetchRoverManifestWithStorage();
+    // this.fetchRoverManifestWithStorage();
   },
 });
 </script>

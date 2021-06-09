@@ -4,77 +4,34 @@
       <h2 class="obs-form__heading">
         Fill out the form to get an image
       </h2>
-      <div class="obs-form__field">
-        <label :for="`latitude--${id}`" class="obs-form__label">
-          Latitude
-          <span class="obs-form__info"> (number from 90 to -90) </span>
-        </label>
-        <input
-          type="text"
-          class="obs-form__input"
-          :class="{ 'obs-form__input--error': $v.latitude.$error }"
-          :id="`latitude--${id}`"
-          v-model="latitude"
-        >
-        <div class="obs-form__error" v-if="$v.latitude.$error">
-          field is invalid
-        </div>
-      </div>
       <input-field
         label="Latitude"
         info="(number from 90 to -90)"
+        :error="$v.latitude.$error"
         v-model.number="latitude"
       />
-      <div class="obs-form__field">
-        <label :for="`longtitude--${id}`" class="obs-form__label">
-          Longtitude
-          <span class="obs-form__info"> (number from 180 to -180) </span>
-        </label>
-        <input
-          type="text"
-          class="obs-form__input"
-          :class="{ 'obs-form__input--error': $v.longtitude.$error }"
-          :id="`longtitude--${id}`"
-          v-model="longtitude"
-        >
-        <div class="obs-form__error" v-if="$v.longtitude.$error">
-          field is invalid
-        </div>
-      </div>
 
-      <div class="obs-form__field">
-        <label :for="`dim--${id}`" class="obs-form__label">
-          Dim
-          <span class="obs-form__info"> (number from 0.1 to 0.9) </span>
-        </label>
-        <input
-          type="text"
-          class="obs-form__input"
-          :class="{ 'obs-form__input--error': $v.dim.$error }"
-          :id="`dim--${id}`"
-          v-model="dim"
-        >
-        <div class="obs-form__error" v-if="$v.dim.$error">
-          field is invalid
-        </div>
-      </div>
+      <input-field
+        label="Longtitude"
+        info="(number from 180 to -180)"
+        :error="$v.longtitude.$error"
+        v-model.number="longtitude"
+      />
 
-      <div class="obs-form__field">
-        <label :for="`dim--${id}`" class="obs-form__label">
-          Date
-        </label>
-        <input
-          type="date"
-          class="obs-form__input"
-          :class="{ 'obs-form__input--error': $v.date.$error }"
-          :id="`date--${id}`"
-          :max="maxDate"
-          v-model="date"
-        >
-        <div class="obs-form__error" v-if="$v.date.$error">
-          field is invalid
-        </div>
-      </div>
+      <input-field
+        label="Dim"
+        info="(number from 0.1 to 0.9)"
+        :error="$v.dim.$error"
+        v-model.number="dim"
+      />
+
+      <input-field
+        label="Date"
+        type="date"
+        info="(number from 0.1 to 0.9)"
+        :error="$v.date.$error"
+        v-model="date"
+      />
 
       <div class="obs-form__field">
         <button

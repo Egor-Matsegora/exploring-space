@@ -4,15 +4,24 @@
 <script lang="ts">
 import Vue from 'vue';
 import { mapActions, mapState } from 'vuex';
+import { v4 as uuid } from 'uuid';
 
 import Loader from '@/components/Loader/Loader.vue';
 import { TRootState } from '@/store/types';
 import { TRoversState } from '@/store/modules/rovers/types';
 import { IRoverManifest } from '../../interfaces/rover-manifest';
+import { roverMap } from '../../rover-maps';
 
 export default Vue.extend({
   name: 'RoversForm',
   components: { Loader },
+  data() {
+    return {
+      date: '',
+      camera: '',
+      id: uuid(),
+    };
+  },
   computed: {
     ...mapState({
       loading(state: TRootState): boolean {
@@ -21,9 +30,19 @@ export default Vue.extend({
       roverManifest(state: TRootState): IRoverManifest | null {
         return (state.rovers as TRoversState).roverManifest;
       },
+      activeRover(state: TRootState): string {
+        return (state.rovers as TRoversState).activeRover;
+      },
     }),
+    roverCameras() {
+      const rover = roverMap.find((rover) => rover.name === this.activeRover);
+      return rover ? rover.cameras : [];
+    },
   },
   methods: {
+    handleSubmit: () => {
+      console.log('handleSubmit');
+    },
     ...mapActions(['fetchRoverManifestWithStorage']),
   },
   beforeRouteUpdate(to, from, next) {
@@ -31,7 +50,12 @@ export default Vue.extend({
     next();
   },
   beforeMount() {
-    // this.fetchRoverManifestWithStorage();
+    this.fetchRoverManifestWithStorage();
+  },
+  filters: {
+    dateToString(value: string): string {
+      return value.split('-').reverse().join('. ');
+    },
   },
 });
 </script>

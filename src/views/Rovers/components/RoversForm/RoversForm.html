@@ -1,8 +1,71 @@
 <div class="r-form">
   <div class="r-form__loader" v-if="loading">
-    <loader />
+    <div class="r-form__loader-holder">
+      <loader />
+    </div>
   </div>
-  <div class="r-form__info">
-    <h1 class="r-form__name"></h1>
+  <div class="r-form__content" v-else>
+    <h1 class="r-form__name">
+      {{ roverManifest.photo_manifest.name }} rover
+    </h1>
+    <ul class="r-form__info">
+      <li class="r-form__info-item">
+        <span class="r-form_info-name">launch date</span>
+        <span class="r-form_info-value">
+          {{ roverManifest.photo_manifest.launch_date | dateToString }}
+        </span>
+      </li>
+      <li class="r-form__info-item">
+        <span class="r-form_info-name">landing date</span>
+        <span class="r-form_info-value">
+          {{ roverManifest.photo_manifest.landing_date | dateToString }}
+        </span>
+      </li>
+      <li class="r-form__info-item" v-if="roverManifest.photo_manifest.status === 'complete'">
+        <span class="r-form_info-name">end date</span>
+        <span class="r-form_info-value">
+          {{ roverManifest.photo_manifest.max_date | dateToString }}
+        </span>
+      </li>
+      <li class="r-form__info-item">
+        <span class="r-form_info-name">status</span>
+        <span class="r-form_info-value">
+          {{ roverManifest.photo_manifest.status }}
+        </span>
+      </li>
+      <li class="r-form__info-item">
+        <span class="r-form_info-name">total photos</span>
+        <span class="r-form_info-value">
+          {{ roverManifest.photo_manifest.total_photos }}
+        </span>
+      </li>
+    </ul>
+    <form @submit.prevent="handleSubmit" class="r-form__search">
+      <div class="r-form__field">
+        <label :for="`date-${id}`" class="r-form__label">
+          choose date
+        </label>
+        <input
+          type="date"
+          name="date"
+          :id="`date-${id}`"
+          class="r-form__input"
+          v-model="date"
+        >
+      </div>
+      <div class="r-form__field">
+        <label :for="`camera-${id}`" class="r-form__label">
+          choose camera
+        </label>
+        <select name="camera" :id="`camera-${id}`" v-model="camera">
+          <option v-for="cam of roverCameras" value="cam">{{ cam }}</option>
+        </select>
+      </div>
+      <div class="r-form__field">
+        <button type="submit" class="r-form__submit">
+          find photos
+        </button>
+      </div>
+    </form>
   </div>
 </div>

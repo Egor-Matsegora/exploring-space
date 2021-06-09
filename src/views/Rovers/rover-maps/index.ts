@@ -1,9 +1,10 @@
 import { CamerasEnum } from './../enums/cameras-enum';
 import { RoversEnum } from './../enums/rovers-enum';
 
-export const roverMap: Readonly<Array<Readonly<{ [Value in RoversEnum]?: Array<string> }>>> = [
+export const roverMap: Readonly<Array<Readonly<{ name: string; cameras: Array<string> }>>> = [
   {
-    [RoversEnum.CURIOSITY]: [
+    name: RoversEnum.CURIOSITY,
+    cameras: [
       CamerasEnum.FRONT_HAZARD_AVOIDANCE_CAMERA,
       CamerasEnum.REAR_HAZARD_AVIODANCE_CAMERA,
       CamerasEnum.MAST_CAMERA,
@@ -14,7 +15,8 @@ export const roverMap: Readonly<Array<Readonly<{ [Value in RoversEnum]?: Array<s
     ],
   },
   {
-    [RoversEnum.OPPORTUNITY]: [
+    name: RoversEnum.OPPORTUNITY,
+    cameras: [
       CamerasEnum.FRONT_HAZARD_AVOIDANCE_CAMERA,
       CamerasEnum.REAR_HAZARD_AVIODANCE_CAMERA,
       CamerasEnum.NAVIGATION_CAMERA,
@@ -23,7 +25,8 @@ export const roverMap: Readonly<Array<Readonly<{ [Value in RoversEnum]?: Array<s
     ],
   },
   {
-    [RoversEnum.SPIRIT]: [
+    name: RoversEnum.SPIRIT,
+    cameras: [
       CamerasEnum.FRONT_HAZARD_AVOIDANCE_CAMERA,
       CamerasEnum.REAR_HAZARD_AVIODANCE_CAMERA,
       CamerasEnum.NAVIGATION_CAMERA,

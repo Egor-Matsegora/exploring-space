@@ -16,7 +16,7 @@ export const api = {
     return ajax.get<T>(API_URL);
   },
   getActiveRoverManifest<T>(rover: string): Subscribable<T> {
-    return ajax.getJSON<T>(`${ROVERS_MANIFEST_API}${rover}&api_key=${API_KEY}`).pipe(map((res) => res));
+    return ajax.getJSON<T>(`${ROVERS_MANIFEST_API}${rover}?api_key=${API_KEY}`).pipe(map((res) => res));
   },
   getRoverPhotos<T>(data: IRoverFormData): Subscribable<T> {
     return ajax

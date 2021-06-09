@@ -3,19 +3,34 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
+import Loader from '@/components/Loader/Loader.vue';
 import { TRootState } from '@/store/types';
 import { TRoversState } from '@/store/modules/rovers/types';
+import { IRoverManifest } from '../../interfaces/rover-manifest';
 
 export default Vue.extend({
   name: 'RoversForm',
+  components: { Loader },
   computed: {
     ...mapState({
-      loading(state: TRootState) {
+      loading(state: TRootState): boolean {
         return (state.rovers as TRoversState).manifestLoading;
       },
+      roverManifest(state: TRootState): IRoverManifest | null {
+        return (state.rovers as TRoversState).roverManifest;
+      },
     }),
+  },
+  methods: {
+    ...mapActions(['fetchRoverManifestWithStorage']),
+  },
+  beforeRouteUpdate() {
+    this.fetchRoverManifestWithStorage();
+  },
+  beforeMount() {
+    this.fetchRoverManifestWithStorage();
   },
 });
 </script>

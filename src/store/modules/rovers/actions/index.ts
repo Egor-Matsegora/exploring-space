@@ -33,7 +33,7 @@ export const actions: ActionTree<TRoversState, TRootState> = {
   },
   fetchRoverManifestWithStorage({ dispatch, commit, state }): Promise<IRoverManifest | unknown> {
     const activeRoverManifestFlag =
-      !localStorage.getItem(state.activeRover) &&
+      localStorage.getItem(state.activeRover) &&
       (JSON.parse(localStorage.getItem(state.activeRover) as string) as IRoverManifest).photo_manifest.status ===
         'active';
 

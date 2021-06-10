@@ -1,0 +1,22 @@
+.ui-button
+  display: block
+  width: 100%
+  height: 50px
+  margin-top: 20px
+  border-radius: 0
+  border: 1px solid $color-text-secondary
+  color: $color-text-secondary
+  background-color: transparent
+  opacity: 0.8
+  transition: $transition-base
+  cursor: pointer
+
+  &:hover,
+  &:active
+    opacity: 1
+    border-color: $color-text-primary
+    color: $color-text-secondary
+
+  &:disabled
+    opacity: 0.4
+    cursor: not-alowed

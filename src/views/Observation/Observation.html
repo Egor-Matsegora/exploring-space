@@ -4,41 +4,46 @@
       <h2 class="obs-form__heading">
         Fill out the form to get an image
       </h2>
-      <input-field
-        label="Latitude"
-        info="(number from 90 to -90)"
-        :error="$v.latitude.$error"
-        v-model.number="latitude"
-      />
 
-      <input-field
-        label="Longtitude"
-        info="(number from 180 to -180)"
-        :error="$v.longtitude.$error"
-        v-model.number="longtitude"
-      />
+      <div class="obs-form__field">
+        <input-field
+          label="Latitude"
+          info="(number from 90 to -90)"
+          :error="$v.latitude.$error"
+          v-model="latitude"
+        />
+      </div>
 
-      <input-field
-        label="Dim"
-        info="(number from 0.1 to 0.9)"
-        :error="$v.dim.$error"
-        v-model.number="dim"
-      />
+      <div class="obs-form__field">
+        <input-field
+          label="Longtitude"
+          info="(number from 180 to -180)"
+          :error="$v.longtitude.$error"
+          v-model="longtitude"
+        />
+      </div>
+
+      <div class="obs-form__field">
+        <input-field
+          label="Dim"
+          info="(number from 0.1 to 0.9)"
+          :error="$v.dim.$error"
+          v-model="dim"
+        />
+      </div>
 
       <input-field
         label="Date"
         type="date"
-        info="(number from 0.1 to 0.9)"
         :error="$v.date.$error"
         v-model="date"
       />
 
       <div class="obs-form__field">
-        <button
+        <ui-button
           type="submit"
-          class="obs-form__submit"
-          :disabled="loading"
-        >Get image</button>
+          :disabled="!!loading"
+        >Get image</ui-button>
       </div>
     </form>
   </aside>

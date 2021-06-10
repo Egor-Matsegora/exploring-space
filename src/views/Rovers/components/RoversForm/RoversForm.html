@@ -41,18 +41,15 @@
       </li>
     </ul>
     <form @submit.prevent="handleSubmit" class="r-form__search">
+
       <div class="r-form__field">
-        <label :for="`date-${id}`" class="r-form__label">
-          choose date
-        </label>
-        <input
+        <input-field
+          label="Date"
           type="date"
-          name="date"
-          :id="`date-${id}`"
-          class="r-form__input"
           v-model="date"
-        >
+        />
       </div>
+
       <div class="r-form__field">
         <label :for="`camera-${id}`" class="r-form__label">
           choose camera
@@ -61,6 +58,7 @@
           <option v-for="cam of roverCameras" value="cam">{{ cam }}</option>
         </select>
       </div>
+      
       <div class="r-form__field">
         <button type="submit" class="r-form__submit">
           find photos

@@ -24,14 +24,9 @@ export default Vue.extend({
       type: String,
     },
     error: {
-      type: () => true,
+      type: Boolean,
     },
   },
   data: () => ({ id: uuid() }),
-  watch: {
-    value() {
-      this.$emit('input', this.value);
-    },
-  },
 });
 </script>

@@ -8,7 +8,8 @@
     class="input-field__input"
     :class="{ 'input-field__input--error': error }"
     :id="id"
-    v-model="value"
+    :value="value"
+    @input="$emit('input', $event.target.value)"
   >
   <div class="input-field__error" v-if="error">
     field is invalid

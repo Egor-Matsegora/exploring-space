@@ -7,6 +7,7 @@ import { mapActions, mapState } from 'vuex';
 import { v4 as uuid } from 'uuid';
 
 import Loader from '@/components/Loader/Loader.vue';
+import InputField from '@/components/InputField/InputField.vue';
 import { TRootState } from '@/store/types';
 import { TRoversState } from '@/store/modules/rovers/types';
 import { IRoverManifest } from '../../interfaces/rover-manifest';
@@ -14,7 +15,7 @@ import { roverMap } from '../../rover-maps';
 
 export default Vue.extend({
   name: 'RoversForm',
-  components: { Loader },
+  components: { Loader, InputField },
   data() {
     return {
       date: '',

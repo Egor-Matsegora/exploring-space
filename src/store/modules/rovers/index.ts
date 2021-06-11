@@ -5,6 +5,7 @@ import { TRootState } from '@/store/types';
 import { TRoversState } from './types';
 import { actions } from './actions';
 import { mutations } from './mutations';
+import { getters } from './getters';
 
 export const rovers: Module<TRoversState, TRootState> = {
   state: {
@@ -18,4 +19,5 @@ export const rovers: Module<TRoversState, TRootState> = {
   },
   actions,
   mutations,
+  getters,
 };

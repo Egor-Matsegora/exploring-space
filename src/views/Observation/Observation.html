@@ -35,6 +35,7 @@
       <input-field
         label="Date"
         type="date"
+        :max="dateNow"
         :error="$v.date.$error"
         v-model="date"
       />
@@ -55,17 +56,23 @@
       </div>
     </div>
 
-    <div class="observation__img-holder" v-if="imageData && !loading">
-      <img
-        :src="imageData"
-        alt="earth observation"
-        class="observation__img"
+    <template v-else>
+      <div
+        class="observation__img-holder"
+        v-if="imageData"
       >
-    </div>
+        <img
+          :src="imageData"
+          alt="earth observation"
+          class="observation__img"
+        >
+      </div>
 
-    <div
-      class="observation__massage"
-      v-if="!imageData && !loading && notExistsMessage"
-    >{{ notExistsMessage }}</div>
+      <div
+        class="observation__massage"
+        v-if="notExistsMessage"
+      >{{ notExistsMessage }}</div>
+    </template>
+
   </section>
 </div>

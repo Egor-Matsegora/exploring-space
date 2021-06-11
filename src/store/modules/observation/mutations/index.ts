@@ -5,6 +5,8 @@ import { observationMutationTypes } from './mutation-types';
 export const mutations: MutationTree<TObservationState> = {
   [observationMutationTypes.FETCH_OBSERVATION_IMAGE](state: TObservationState) {
     state.observationLoading = true;
+    state.observationImageData = null;
+    state.notExistsMessage = null;
   },
   [observationMutationTypes.FETCH_OBSERVATION_IMAGE_SUCCESS](state: TObservationState, imageData: string) {
     state.observationImageData = imageData;
@@ -19,5 +21,6 @@ export const mutations: MutationTree<TObservationState> = {
   [observationMutationTypes.FETCH_OBSERVATION_IMAGE_NOT_EXIST](state: TObservationState, message: string) {
     state.notExistsMessage = message;
     state.observationLoading = false;
+    state.observationImageData = null;
   },
 };

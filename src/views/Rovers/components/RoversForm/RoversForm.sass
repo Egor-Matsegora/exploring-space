@@ -31,5 +31,26 @@
   font-size: 1.1em
 
 .r-form__field
+  display: flex
+  flex-direction: column
+
   &:not(:last-child)
     margin-bottom: 25px
+
+.r-form__label
+  font-size: 1.1em
+  font-weight: $font-weight-regular
+  margin-bottom: 5px
+
+.r-form__select
+  display: block
+  border: 1px solid $color-background-light
+  background-color: $color-background-lighten
+  color: $color-text-secondary
+  height: 35px
+  padding: 0 10px
+  outline: none
+  cursor: pointer
+
+.r-form__select--error
+  border-color: red

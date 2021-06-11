@@ -44,25 +44,35 @@
 
       <div class="r-form__field">
         <input-field
-          label="Date"
+          label="Coose Earth date"
           type="date"
           v-model="date"
+          :error="$v.date.$error"
         />
       </div>
 
       <div class="r-form__field">
-        <label :for="`camera-${id}`" class="r-form__label">
-          choose camera
+        <label
+          :for="`camera-${id}`"
+          class="r-form__label"
+        >
+          Choose camera
         </label>
-        <select name="camera" :id="`camera-${id}`" v-model="camera">
+        <select
+          name="camera"
+          :id="`camera-${id}`"
+          v-model="camera"
+          class="r-form__select"
+          :class="{ 'r-form__select--error': $v.camera.$error }"
+        >
           <option v-for="cam of roverCameras" value="cam">{{ cam }}</option>
         </select>
       </div>
-      
+
       <div class="r-form__field">
-        <button type="submit" class="r-form__submit">
+        <ui-button type="submit" class="r-form__submit" :disabled="photosLoading">
           find photos
-        </button>
+        </ui-button>
       </div>
     </form>
   </div>

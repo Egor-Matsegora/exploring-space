@@ -1,5 +1,6 @@
 import { ActionTree } from 'vuex';
 import { Observer } from 'rxjs';
+import dayjs from 'dayjs';
 
 import { api } from '@/api';
 import { IMainSliderData } from '@/views/Home/interfaces/IMainSliderData';
@@ -12,7 +13,7 @@ export const actions: ActionTree<THomeState, TRootState> = {
   fetchMainSliderData({ commit, rootState }, dateNow: string): Promise<TMainSliderResponse> {
     commit(homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER);
 
-    const defaultDate = new Date().toDateString();
+    const defaultDate = dayjs().format('YYYY-MM-DD');
 
     return new Promise((resolve, reject) => {
       const observer: Partial<Observer<TMainSliderResponse>> = {
@@ -37,12 +38,11 @@ export const actions: ActionTree<THomeState, TRootState> = {
   },
 
   fetchMainSliderDataWithStorage({ commit, dispatch }): Promise<TMainSliderResponse> {
-    const dateNow = new Date();
-    const sliderData = localStorage.getItem(dateNow.toDateString());
-    const prevDate = new Date(new Date().setDate(dateNow.getDate() - 1)).toDateString();
+    const dateNow = dayjs().format('YYYY-MM-DD');
+    const sliderData = localStorage.getItem(dateNow);
 
-    if (localStorage.getItem(prevDate)) {
-      localStorage.removeItem(prevDate);
+    if (!localStorage.getItem(dateNow)) {
+      localStorage.clear();
     }
 
     if (sliderData) {
@@ -53,6 +53,6 @@ export const actions: ActionTree<THomeState, TRootState> = {
       });
     }
 
-    return dispatch('fetchMainSliderData', dateNow.toDateString());
+    return dispatch('fetchMainSliderData', dateNow);
   },
 };

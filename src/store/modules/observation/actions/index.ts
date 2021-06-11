@@ -22,7 +22,7 @@ export const actions: ActionTree<TObservationState, TRootState> = {
           resolve(response.request.url);
         },
         error(error: AjaxError) {
-          console.log(error.response.msg);
+          console.error(error.response.msg);
           commit(observationMutationTypes.FETCH_OBSERVATION_IMAGE_NOT_EXIST, error.response.msg);
           resolve(error.response.msg);
         },

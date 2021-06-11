@@ -48,6 +48,8 @@
           type="date"
           v-model="date"
           :error="$v.date.$error"
+          :min="roverManifest.photo_manifest.landing_date"
+          :max="roverManifest.photo_manifest.max_date"
         />
       </div>
 
@@ -67,6 +69,9 @@
         >
           <option v-for="cam of roverCameras" value="cam">{{ cam }}</option>
         </select>
+        <div class="r-form__error" v-if="$v.camera.$error">
+          This field is required
+        </div>
       </div>
 
       <div class="r-form__field">

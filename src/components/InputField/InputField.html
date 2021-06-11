@@ -10,6 +10,8 @@
     :id="id"
     :value="value"
     @input="$emit('input', $event.target.value)"
+    :min="min"
+    :max="max"
   >
   <div class="input-field__error" v-if="error">
     field is invalid

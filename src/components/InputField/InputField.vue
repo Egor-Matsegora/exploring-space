@@ -26,6 +26,12 @@ export default Vue.extend({
     error: {
       type: Boolean,
     },
+    min: {
+      type: [String, Number],
+    },
+    max: {
+      type: [String, Number],
+    },
   },
   data: () => ({ id: uuid() }),
 });

@@ -8,7 +8,6 @@ import { mapActions, mapState } from 'vuex';
 import { required, between, numeric, or, decimal } from 'vuelidate/lib/validators';
 import { v4 as uuid } from 'uuid';
 import dayjs from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import Loader from '@/components/Loader/Loader.vue';
 import InputField from '@/components/InputField/InputField.vue';
@@ -16,8 +15,6 @@ import UiButton from '@/components/UiButton/UiButton.vue';
 import { TRootState } from '@/store/types';
 import { TObservationState } from '@/store/modules/observation/types';
 import { IObservationImageFormData } from './interfaces/ObservationImageFormDataInterface';
-
-dayjs.extend(customParseFormat);
 
 export default Vue.extend({
   name: 'Observation',
@@ -33,7 +30,7 @@ export default Vue.extend({
       latitude: '',
       dim: '',
       date: '',
-      dateNow: dayjs(new Date(), 'YYYY-MM-DD'),
+      dateNow: dayjs().format('YYYY-MM-DD'),
     };
   },
   validations: {

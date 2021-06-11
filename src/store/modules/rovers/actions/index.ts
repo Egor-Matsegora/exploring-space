@@ -1,3 +1,4 @@
+import { AjaxError } from 'rxjs/ajax';
 import { IRoverPhoto } from '@/views/Rovers/interfaces/rover-photo';
 import { Observer, Unsubscribable } from 'rxjs';
 import { ActionTree } from 'vuex';
@@ -61,7 +62,7 @@ export const actions: ActionTree<TRoversState, TRootState> = {
           commit(roversMutationTypesEnum.FILL_ROVER_IMAGES_SUCCESS, photos.photos);
           resolve(photos.photos);
         },
-        error(error) {
+        error(error: AjaxError) {
           commit(roversMutationTypesEnum.FILL_ROVER_IMAGES_ERROR, error);
           reject(error);
         },

@@ -1,3 +1,27 @@
 <div class="r-content">
-  
+
+  <div class="r-content__loader" v-if="loading">
+    <div class="r-content__loader-holder">
+      <loader/>
+    </div>
+  </div>
+
+  <div class="r-content__gallery" v-else>
+    <vue-easy-lightbox
+      :visible="visible"
+      :imgs="imgs"
+      :index="imageIndex"
+      :loop="true"
+      @hide="handleHide"
+    ></vue-easy-lightbox>
+
+    <div
+      class="r-content__card"
+      v-for="(photo, i) of photos"
+      :key="photo.id"
+      @click="openGalery(i)"
+    >
+      <img :src="photo.img_src" alt="rover photo" class="r-content__image">
+    </div>
+  </div>
 </div>

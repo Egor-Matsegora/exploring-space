@@ -53,7 +53,7 @@
         />
       </div>
 
-      <div class="r-form__field">
+      <div class="r-form__field" :class="{'r-form__field--disabled': !date}">
         <label
           :for="`camera-${id}`"
           class="r-form__label"
@@ -66,8 +66,13 @@
           v-model="camera"
           class="r-form__select"
           :class="{ 'r-form__select--error': $v.camera.$error }"
+          :disabled="!date"
         >
-          <option v-for="cam of roverCameras" value="cam">{{ cam }}</option>
+          <option
+            v-for="cam of roverCameras"
+            :value="cam.toLowerCase()"
+            :key="cam"
+          >{{ cam }}</option>
         </select>
         <div class="r-form__error" v-if="$v.camera.$error">
           This field is required

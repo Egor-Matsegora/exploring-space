@@ -21,7 +21,7 @@ export const api = {
   getRoverPhotos<T>(data: IRoverFormData): Subscribable<T> {
     return ajax
       .getJSON<T>(
-        `${ROVERS_PHOTOS_API}${data.roverName}/photos?erth_date=${data.date}&camera=${data.camera}&api_key=${API_KEY}`
+        `${ROVERS_PHOTOS_API}${data.roverName}/photos?earth_date=${data.date}&camera=${data.camera}&api_key=${API_KEY}`
       )
       .pipe(map((res) => res));
   },

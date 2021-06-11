@@ -13,16 +13,18 @@ import UiButton from '@/components/UiButton/UiButton.vue';
 import { TRootState } from '@/store/types';
 import { TRoversState } from '@/store/modules/rovers/types';
 import { IRoverManifest } from '../../interfaces/rover-manifest';
-import { roverMap } from '../../rover-maps';
 import { IRoverFormData } from '../../interfaces/rover-form-data';
+
+import { IRoverData } from '../../interfaces/rover-data';
 
 export default Vue.extend({
   name: 'RoversForm',
   components: { Loader, InputField, UiButton },
-  data: () => ({
+  data: (): IRoverData => ({
     date: '',
     camera: '',
     id: uuid(),
+    roverCameras: [],
   }),
   validations: {
     date: { required },
@@ -43,9 +45,12 @@ export default Vue.extend({
         return (state.rovers as TRoversState).activeRover;
       },
     }),
-    roverCameras(): string[] | [] {
-      const rover = roverMap.find((rover) => rover.name === this.activeRover);
-      return rover ? rover.cameras : [];
+  },
+  watch: {
+    date() {
+      const erthDatePhotos = this.roverManifest?.photo_manifest.photos.find((photo) => photo.earth_date === this.date);
+
+      this.roverCameras = erthDatePhotos ? erthDatePhotos.cameras : [];
     },
   },
   methods: {
@@ -57,7 +62,9 @@ export default Vue.extend({
         camera: this.camera,
         roverName: this.activeRover,
       };
-      this.fetchPhotos(reqData);
+      this.fetchPhotos(reqData).finally(() => {
+        this.$v.$reset();
+      });
     },
     ...mapActions({
       fetchManifest: 'fetchRoverManifestWithStorage',
@@ -66,6 +73,7 @@ export default Vue.extend({
   },
   beforeRouteUpdate(to, from, next) {
     this.fetchManifest();
+    this.$v.$reset();
     next();
   },
   beforeMount() {

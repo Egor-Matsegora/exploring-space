@@ -9,6 +9,7 @@ import { IRoverFormData } from '@/views/Rovers/interfaces/rover-form-data';
 import { roversMutationTypesEnum } from '../mutations/mutation-types';
 import { TRootState } from '@/store/types';
 import { TRoversState } from '../types';
+import { IRoverPhotosResponse } from '@/views/Rovers/interfaces/rover-photos-response';
 
 export const actions: ActionTree<TRoversState, TRootState> = {
   fetchRoverManifest({ commit, state, rootState }): Promise<IRoverManifest | unknown> {
@@ -55,10 +56,10 @@ export const actions: ActionTree<TRoversState, TRootState> = {
     commit(roversMutationTypesEnum.FILL_ROVER_IMAGES);
 
     return new Promise((resolve, reject) => {
-      const observer: Partial<Observer<IRoverPhoto[]>> = {
+      const observer: Partial<Observer<IRoverPhotosResponse>> = {
         next(photos) {
-          commit(roversMutationTypesEnum.FILL_ROVER_IMAGES_SUCCESS, photos);
-          resolve(photos);
+          commit(roversMutationTypesEnum.FILL_ROVER_IMAGES_SUCCESS, photos.photos);
+          resolve(photos.photos);
         },
         error(error) {
           commit(roversMutationTypesEnum.FILL_ROVER_IMAGES_ERROR, error);
@@ -67,8 +68,8 @@ export const actions: ActionTree<TRoversState, TRootState> = {
       };
 
       const subscription: Unsubscribable = api
-        .getRoverPhotos<IRoverPhoto[]>(data)
-        .subscribe(observer as Observer<IRoverPhoto[]>);
+        .getRoverPhotos<IRoverPhotosResponse>(data)
+        .subscribe(observer as Observer<IRoverPhotosResponse>);
       rootState.subscriptions.push(subscription);
     });
   },

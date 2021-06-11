@@ -66,6 +66,11 @@ export default Vue.extend({
         this.$v.$reset();
       });
     },
+    resetForm(): void {
+      this.$v.$reset();
+      this.camera = '';
+      this.date = '';
+    },
     ...mapActions({
       fetchManifest: 'fetchRoverManifestWithStorage',
       fetchPhotos: 'fetchRoverPhotos',
@@ -73,7 +78,7 @@ export default Vue.extend({
   },
   beforeRouteUpdate(to, from, next) {
     this.fetchManifest();
-    this.$v.$reset();
+    this.resetForm();
     next();
   },
   beforeMount() {

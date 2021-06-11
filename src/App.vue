@@ -1,9 +1,6 @@
 <template src="./App.html"></template>
 
-<style
-  lang="sass"
-  src="./App.sass"
-></style>
+<style lang="sass" src="./App.sass"></style>
 
 <script lang="ts">
 import Vue from 'vue';
@@ -13,13 +10,13 @@ import { mapActions } from 'vuex';
 
 export default Vue.extend({
   components: {
-    AppHeader
+    AppHeader,
   },
   methods: {
-    ...mapActions(['unsubscribeAll'])
+    ...mapActions(['unsubscribeAll']),
   },
   beforeDestroy() {
     this.unsubscribeAll();
-  }
-})
+  },
+});
 </script>

@@ -7,15 +7,34 @@
       v-if="mainSliderData.length && !mainSliderLoading"
       ref="swiperRef"
     >
-      <swiper-slide v-for="slide in mainSliderData">
+      <swiper-slide
+        v-for="slide in mainSliderData"
+      >
         <div class="home__slide slide">
-          <div class="slide__img-holder">
+          <div
+            class="slide__img-holder"
+            @mouseenter="clearSliderInterval"
+            @mouseleave="setIntervalForSwiperAutoplay"
+          >
             <img
+              v-if="!slide.url.includes('youtube')"
               :src="slide.url"
               :alt="slide.title"
               :title="slide.explanation"
               class="slide__img"
             />
+            <iframe
+              v-else
+              width="560"
+              height="315"
+              class="slide__img"
+              :src="slide.url"
+              :title="slide.explanation"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            >
+            </iframe>
           </div>
           <div class="slide__text container-unscoped">
             <h2 class="slide__title">

@@ -1,52 +1,58 @@
-<template src="./Home.html">
-</template>
+<template src="./Home.html"></template>
 
 <style lang="sass" src="./Home.sass" scoped></style>
 
 <script lang="ts">
-import Vue from "vue";
-import { mapActions, mapState } from "vuex";
+import Vue from 'vue';
+import { mapActions, mapState } from 'vuex';
 
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 import SwiperCore, { EffectFade, Navigation, Pagination, SwiperOptions } from 'swiper/core';
 
-import { TRootState } from "@/store/types";
-import Loader from "@/components/Loader/Loader.vue";
+import { TRootState } from '@/store/types';
+import Loader from '@/components/Loader/Loader.vue';
 
 SwiperCore.use([EffectFade, Navigation, Pagination]);
 
+interface IHomeData {
+  swiperOptions: SwiperOptions;
+  swiperInterval: number;
+  intervalId: number | null;
+}
+
 export default Vue.extend({
-  name: "Home",
+  name: 'Home',
   components: {
     Swiper,
     SwiperSlide,
-    Loader
+    Loader,
   },
-  data() {
+  data(): IHomeData {
     return {
       swiperOptions: {
         spaceBetween: 30,
         effect: 'fade',
-        loop: true
+        loop: true,
       } as SwiperOptions,
-      swiperInterval: 20000
-    }
+      swiperInterval: 20000,
+      intervalId: null,
+    };
   },
   methods: {
-    ...mapActions([
-      'fetchMainSliderDataWithStorage',
-      'fetchMainSliderData'
-    ]),
+    ...mapActions(['fetchMainSliderDataWithStorage', 'fetchMainSliderData']),
     setIntervalForSwiperAutoplay(): void {
-      let interval: number | null = null;
       if (!this.mainSliderLoading) {
-        interval = setInterval(() => {
+        this.intervalId = setInterval(() => {
           this.$refs.swiperRef && (this.$refs.swiperRef as any).$swiper.slideNext(1700);
-        }, this.swiperInterval)
+        }, this.swiperInterval);
       } else {
-        interval && clearInterval(interval);
+        this.clearSliderInterval();
       }
-    }
+    },
+    clearSliderInterval(): void {
+      this.intervalId && clearInterval(this.intervalId);
+      this.intervalId = null;
+    },
   },
   computed: {
     ...mapState({
@@ -61,13 +67,13 @@ export default Vue.extend({
   watch: {
     mainSliderLoading() {
       this.setIntervalForSwiperAutoplay();
-    }
+    },
   },
   created() {
     this.fetchMainSliderDataWithStorage();
   },
   mounted() {
     this.setIntervalForSwiperAutoplay();
-  }
+  },
 });
 </script>

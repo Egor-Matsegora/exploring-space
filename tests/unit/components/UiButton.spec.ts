@@ -37,7 +37,7 @@ describe('UiButton', () => {
     ${'type'}     | ${'submit'} | ${'submit'}
     ${'disabled'} | ${true}     | ${'disabled'}
   `(
-    '[UiButton] it should change type and disabled attributes base on input props',
+    '[UiButton] it should change $propName attribute base on input props',
     async ({ propName, propValue, expectedValue }) => {
       // Arrange
       // Act

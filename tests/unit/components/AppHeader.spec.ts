@@ -8,12 +8,11 @@ describe('AppHeader', () => {
 
   const createComponent = () => (wrapper = shallowMount(AppHeader));
 
+  beforeEach(() => createComponent());
+
   it('[AppHeader] it should created', () => {
     // Arrange
-    createComponent();
-
     // Act
-
     // Assert
     expect(wrapper.exists()).toBeTruthy();
     expect(wrapper.find('header').exists()).toBeTruthy();
@@ -25,11 +24,10 @@ describe('AppHeader', () => {
     ${'header-nav'}  | ${HeaderNav}
   `('[AppHeader] it should render components', ({ componentTagName, componentInstance }) => {
     // Arrange
-    createComponent();
-
     // Act
-
     // Assert
     expect(wrapper.find(`${componentTagName}-stub`).is(componentInstance)).toBeTruthy();
   });
+
+  afterEach(() => wrapper.destroy());
 });

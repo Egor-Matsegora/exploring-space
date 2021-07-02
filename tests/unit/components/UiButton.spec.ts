@@ -8,12 +8,11 @@ describe('UiButton', () => {
   const mockSlotText = 'test slot text';
   const createComponent = () => (wrapper = shallowMount(UiButton, { slots: { default: mockSlotText } }));
 
+  beforeEach(() => createComponent());
+
   it('[UiButton] it should created', () => {
     // Arrange
-    createComponent();
-
     // Act
-
     // Assert
     expect(wrapper.exists()).toBeTruthy();
     expect(wrapper.element.tagName).toBe('BUTTON');
@@ -21,20 +20,14 @@ describe('UiButton', () => {
 
   it('[UiButton] it should have button type by default', () => {
     // Arrange
-    createComponent();
-
     // Act
-
     // Assert
     expect(wrapper.attributes('type')).toBe('button');
   });
 
   it('[UiButton] it should display slot text', () => {
     // Arrange
-    createComponent();
-
     // Act
-
     // Assert
     expect(wrapper.text()).toContain(mockSlotText);
   });
@@ -47,13 +40,10 @@ describe('UiButton', () => {
     '[UiButton] it should change type and disabled attributes base on input props',
     async ({ propName, propValue, expectedValue }) => {
       // Arrange
-      createComponent();
-
       // Act
       await wrapper.setProps({
         [propName]: propValue,
       });
-
       // Assert
       expect(wrapper.attributes(propName)).toBe(expectedValue);
     }

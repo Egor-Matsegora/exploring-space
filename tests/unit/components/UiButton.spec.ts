@@ -28,22 +28,25 @@ describe('UiButton', () => {
     expect(wrapper.attributes('type')).toBe('button');
   });
 
-  it('[UiButton] it should change type and disabled attributes base on input props', () => {
-    // Arrange
-    createComponent();
+  it.each`
+    propName      | propValue   | expectedValue
+    ${'type'}     | ${'submit'} | ${'submit'}
+    ${'disabled'} | ${true}     | ${'disabled'}
+  `(
+    '[UiButton] it should change type and disabled attributes base on input props',
+    async ({ propName, propValue, expectedValue }) => {
+      // Arrange
+      createComponent();
 
-    // Act
-    (
-      wrapper.setProps({
-        type: 'submit',
-        disabled: true,
-      }) as Promise<void>
-    ).then(() => {
+      // Act
+      await wrapper.setProps({
+        [propName]: propValue,
+      });
+
       // Assert
-      expect(wrapper.attributes('disabled')).toBeTruthy();
-      expect(wrapper.attributes('type')).toBe('submit');
-    });
-  });
+      expect(wrapper.attributes(propName)).toBe(expectedValue);
+    }
+  );
 
   afterEach(() => {
     wrapper.destroy();

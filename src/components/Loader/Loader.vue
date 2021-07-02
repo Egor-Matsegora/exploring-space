@@ -2,8 +2,8 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'Loader'
-})
+  name: 'Loader',
+});
 </script>
 
 <template>

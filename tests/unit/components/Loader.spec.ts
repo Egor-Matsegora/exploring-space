@@ -1,13 +1,13 @@
-import Logo from '@/components/Logo/Logo.vue';
+import Loader from '@/components/Loader/Loader.vue';
 
 import { shallowMount, Wrapper } from '@vue/test-utils';
 
 describe('Logo', () => {
-  let wrapper: Wrapper<Logo>;
+  let wrapper: Wrapper<Loader>;
 
-  const createComponent = () => (wrapper = shallowMount(Logo));
+  const createComponent = () => (wrapper = shallowMount(Loader));
 
-  it('[Logo] it should created', () => {
+  it('[Loader] it should created', () => {
     // Arrange
     createComponent();
 
@@ -15,7 +15,7 @@ describe('Logo', () => {
 
     // Assert
     expect(wrapper.exists()).toBeTruthy();
-    expect(wrapper.find('.app-logo').exists()).toBeTruthy();
+    expect(wrapper.find('.loader').exists()).toBeTruthy();
   });
 
   afterEach(() => {

@@ -5,7 +5,8 @@ import { shallowMount, Wrapper } from '@vue/test-utils';
 describe('UiButton', () => {
   let wrapper: Wrapper<UiButton>;
 
-  const createComponent = () => (wrapper = shallowMount(UiButton));
+  const mockSlotText = 'test slot text';
+  const createComponent = () => (wrapper = shallowMount(UiButton, { slots: { default: mockSlotText } }));
 
   it('[UiButton] it should created', () => {
     // Arrange
@@ -26,6 +27,16 @@ describe('UiButton', () => {
 
     // Assert
     expect(wrapper.attributes('type')).toBe('button');
+  });
+
+  it('[UiButton] it should display slot text', () => {
+    // Arrange
+    createComponent();
+
+    // Act
+
+    // Assert
+    expect(wrapper.text()).toContain(mockSlotText);
   });
 
   it.each`

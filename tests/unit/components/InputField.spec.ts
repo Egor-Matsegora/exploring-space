@@ -93,16 +93,12 @@ fdescribe('InputField', () => {
     // Arrange
     const MOCK_MODEL_VALUE = 'test.value';
     // Act
-    await wrapper.setValue(MOCK_MODEL_VALUE);
+    await wrapper.setProps({ value: MOCK_MODEL_VALUE });
+    await wrapper.find('input').setValue(MOCK_MODEL_VALUE);
     // Assert
-
-    expect(wrapper.find('input').element as HTMLInputElement).toBe(MOCK_MODEL_VALUE);
-    expect(wrapper.emitted().input).toBeTruthy();
+    expect((wrapper.find('input').element as HTMLInputElement).value).toBe(MOCK_MODEL_VALUE);
+    expect(wrapper.emitted().input).toStrictEqual([[MOCK_MODEL_VALUE]]);
   });
-
-  // it('[InputField] it should emits input event when user change input data', () => {
-  //   wrapper.find('input').
-  // })
 
   afterEach(() => {
     wrapper.destroy();

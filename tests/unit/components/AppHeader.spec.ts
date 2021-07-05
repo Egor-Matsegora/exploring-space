@@ -26,7 +26,7 @@ describe('AppHeader', () => {
     // Arrange
     // Act
     // Assert
-    expect(wrapper.find(`${componentTagName}-stub`).is(componentInstance)).toBeTruthy();
+    expect(wrapper.findComponent(componentInstance).is(componentInstance)).toBeTruthy();
   });
 
   afterEach(() => wrapper.destroy());

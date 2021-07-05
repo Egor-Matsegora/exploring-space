@@ -3,7 +3,7 @@ import UiButton from '@/components/UiButton/UiButton.vue';
 import { shallowMount, Wrapper } from '@vue/test-utils';
 
 describe('UiButton', () => {
-  let wrapper: Wrapper<UiButton>;
+  let wrapper: Wrapper<Vue>;
 
   const mockSlotText = 'test slot text';
   const createComponent = () => (wrapper = shallowMount(UiButton, { slots: { default: mockSlotText } }));

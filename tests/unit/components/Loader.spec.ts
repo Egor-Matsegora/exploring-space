@@ -3,7 +3,7 @@ import Loader from '@/components/Loader/Loader.vue';
 import { shallowMount, Wrapper } from '@vue/test-utils';
 
 describe('Logo', () => {
-  let wrapper: Wrapper<Loader>;
+  let wrapper: Wrapper<Vue>;
 
   const createComponent = () => (wrapper = shallowMount(Loader));
 

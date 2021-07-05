@@ -2,7 +2,7 @@ import { shallowMount, Wrapper } from '@vue/test-utils';
 import InputField from '@/components/InputField/InputField.vue';
 
 fdescribe('InputField', () => {
-  let wrapper: Wrapper<InputField>;
+  let wrapper: Wrapper<Vue>;
 
   const createComponent = () => (wrapper = shallowMount(InputField));
 

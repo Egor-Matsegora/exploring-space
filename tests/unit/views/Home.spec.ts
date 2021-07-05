@@ -4,11 +4,10 @@ import Vuex, { Store } from 'vuex';
 import { cloneDeep } from 'lodash';
 
 import { routes } from '@/router';
-import { home } from '@/store/modules/home';
 import Home from '@/views/Home/Home.vue';
 
 describe('HomeView', () => {
-  let wrapper: Wrapper<Home>;
+  let wrapper: Wrapper<Vue>;
   let mockRouter: Router | null;
   let mockStore: Store<any> | null;
 

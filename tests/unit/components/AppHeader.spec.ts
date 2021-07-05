@@ -4,7 +4,7 @@ import Logo from '@/components/Logo/Logo.vue';
 import HeaderNav from '@/components/HeaderNav/HeaderNav.vue';
 
 describe('AppHeader', () => {
-  let wrapper: Wrapper<AppHeader>;
+  let wrapper: Wrapper<Vue>;
 
   const createComponent = () => (wrapper = shallowMount(AppHeader));
 

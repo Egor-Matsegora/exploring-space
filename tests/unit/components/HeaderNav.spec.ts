@@ -7,7 +7,7 @@ import HeaderNav from '@/components/HeaderNav/HeaderNav.vue';
 import { routes } from '@/router';
 
 describe('HeaderNav', () => {
-  let wrapper: Wrapper<HeaderNav>;
+  let wrapper: Wrapper<Vue>;
   let mockStore: Store<{ [key: string]: any }> | null;
   let mockRouter: Router | null;
 
@@ -40,8 +40,8 @@ describe('HeaderNav', () => {
   });
 
   it('[HeaderNav] should have params of active rover in rovers link', () => {
-    const roversLink = (): Wrapper<HeaderNav> =>
-      wrapper.findAll('[to]').wrappers.find((wrapper) => wrapper.text() === 'Mars Rovers') as Wrapper<HeaderNav>;
+    const roversLink = (): Wrapper<Vue> =>
+      wrapper.findAll('[to]').wrappers.find((wrapper) => wrapper.text() === 'Mars Rovers') as Wrapper<Vue>;
     const { activeRover } = mockStore?.state.rovers;
     expect(roversLink().props().to.params.rover).toBe(activeRover);
   });

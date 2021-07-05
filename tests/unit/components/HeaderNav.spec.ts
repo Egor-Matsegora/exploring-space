@@ -49,7 +49,6 @@ describe('HeaderNav', () => {
   it('[HeaderNav] should change isMenuOpen flag on menu button click', async () => {
     const menuBtn = () => wrapper.find('.app-nav__menu-btn');
     await menuBtn().trigger('click');
-    expect(wrapper.vm.$data.isMenuOpen).toBeTruthy();
     expect(menuBtn().classes()).toContain('app-nav__menu-btn--open');
     expect(wrapper.find('ul').classes()).toContain('app-nav__list--open');
   });

@@ -4,27 +4,26 @@ import Vuex, { Store } from 'vuex';
 import { cloneDeep } from 'lodash';
 
 import HeaderNav from '@/components/HeaderNav/HeaderNav.vue';
-import { rovers } from '@/store/modules/rovers';
 import { routes } from '@/router';
 
 describe('HeaderNav', () => {
   let wrapper: Wrapper<HeaderNav>;
-  let store: Store<{ [key: string]: any }> | null;
-  let router: Router | null;
+  let mockStore: Store<{ [key: string]: any }> | null;
+  let mockRouter: Router | null;
 
   const createComponent = () => {
     const localVue = createLocalVue();
 
     localVue.use(Router);
-    router = new Router({ routes });
+    mockRouter = new Router({ routes: cloneDeep(routes) });
 
     localVue.use(Vuex);
-    store = new Vuex.Store({ modules: { rovers: cloneDeep(rovers) } });
+    mockStore = new Vuex.Store({ modules: { rovers: { state: { activeRover: 'curiosity' } } } });
 
     wrapper = shallowMount(HeaderNav, {
       localVue,
-      router,
-      store,
+      router: mockRouter,
+      store: mockStore,
     });
   };
 
@@ -41,9 +40,9 @@ describe('HeaderNav', () => {
   });
 
   it('[HeaderNav] should have params of active rover in rovers link', () => {
-    const roversLink = (): Wrapper<any> =>
-      wrapper.findAll('[to]').wrappers.find((wrapper) => wrapper.text() === 'Mars Rovers') as any;
-    const { activeRover } = store?.state.rovers;
+    const roversLink = (): Wrapper<HeaderNav> =>
+      wrapper.findAll('[to]').wrappers.find((wrapper) => wrapper.text() === 'Mars Rovers') as Wrapper<HeaderNav>;
+    const { activeRover } = mockStore?.state.rovers;
     expect(roversLink().props().to.params.rover).toBe(activeRover);
   });
 
@@ -57,7 +56,7 @@ describe('HeaderNav', () => {
 
   afterEach(() => {
     wrapper.destroy();
-    store = null;
-    router = null;
+    mockStore = null;
+    mockRouter = null;
   });
 });

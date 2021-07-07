@@ -10,17 +10,17 @@ import { TMainSliderResponse } from '../types/index';
 import { THomeState } from '../types';
 
 export const actions: ActionTree<THomeState, TRootState> = {
-  fetchMainSliderData({ commit, rootState }, dateNow: string): Promise<TMainSliderResponse> {
+  fetchMainSliderData({ commit, rootState }, dateNow?: string): Promise<TMainSliderResponse> {
     commit(homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER);
 
-    const defaultDate = dayjs().format('YYYY-MM-DD');
+    const defaultDate = dateNow || dayjs().format('YYYY-MM-DD');
 
     return new Promise((resolve, reject) => {
       const observer: Partial<Observer<TMainSliderResponse>> = {
         next(res: TMainSliderResponse) {
           const resultRes: IMainSliderData[] = ((res as IMainSliderData[]).length ? res : [res]) as IMainSliderData[];
           commit(homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER_SUCCESS, resultRes);
-          localStorage.setItem(dateNow || defaultDate, JSON.stringify(resultRes));
+          localStorage.setItem(defaultDate, JSON.stringify(resultRes));
           resolve(resultRes);
         },
         error(err) {

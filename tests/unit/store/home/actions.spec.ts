@@ -5,6 +5,7 @@ import { actions } from '@/store/modules/home/actions';
 import { homeStoreMutationTypes } from '@/store/modules/home/mutations/mutation-types';
 import { TRootState } from '@/store/types/index';
 import { MOCK_MAIN_SLIDER_DATA } from '../../fixtures/main-slider-data.fixtures';
+import { mockApiHelper } from '../../helpers/api.helper';
 
 describe('Home Store module actions', () => {
   describe('[Home Store fetchMainSliderDataWithStorage]', () => {
@@ -52,7 +53,7 @@ describe('Home Store module actions', () => {
     });
 
     it('should commit mutations for main slider data succes', async () => {
-      jest.spyOn(api, 'getDataForMainSlider').mockReturnValue(of(MOCK_MAIN_SLIDER_DATA));
+      mockApiHelper('getDataForMainSlider', MOCK_MAIN_SLIDER_DATA);
       jest.spyOn(window.localStorage.__proto__, 'setItem');
 
       const data = await action({ commit, rootState });
@@ -72,7 +73,7 @@ describe('Home Store module actions', () => {
 
     it('should commit mutations for main slider data error', async () => {
       const MOCKED_ERROR = new Error('it is a mocked error');
-      jest.spyOn(api, 'getDataForMainSlider').mockReturnValue(throwError(() => MOCKED_ERROR));
+      mockApiHelper('getDataForMainSlider', MOCKED_ERROR, true);
       jest.spyOn(window.localStorage.__proto__, 'setItem');
 
       try {

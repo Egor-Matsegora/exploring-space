@@ -6,6 +6,8 @@ module.exports = {
   collectCoverageFrom: [
     '<rootDir>/src/components/**/*.vue',
     '<rootDir>/src/views/**/*.vue',
-    '<rootDir>/src/api/**/*.vue',
+    '<rootDir>/src/api/**/*.ts',
+    '<rootDir>/src/store/**/mutations/*.ts',
+    '<rootDir>/src/store/**/actions/*.ts',
   ],
 };

@@ -10,6 +10,7 @@ export const mutations: MutationTree<THomeState> = {
   [homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER_SUCCESS](state, data) {
     state.mainSliderLoading = false;
     state.mainSliderData = data;
+    state.error = null;
   },
   [homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER_ERROR](state, err) {
     state.mainSliderLoading = false;

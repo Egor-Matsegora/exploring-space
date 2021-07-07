@@ -18,10 +18,9 @@ export const actions: ActionTree<THomeState, TRootState> = {
     return new Promise((resolve, reject) => {
       const observer: Partial<Observer<TMainSliderResponse>> = {
         next(res: TMainSliderResponse) {
-          const resultRes: IMainSliderData[] = ((res as IMainSliderData[]).length ? res : [res]) as IMainSliderData[];
-          commit(homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER_SUCCESS, resultRes);
-          localStorage.setItem(defaultDate, JSON.stringify(resultRes));
-          resolve(resultRes);
+          commit(homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER_SUCCESS, res);
+          localStorage.setItem(defaultDate, JSON.stringify(res));
+          resolve(res);
         },
         error(err) {
           commit(homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER_ERROR, err);

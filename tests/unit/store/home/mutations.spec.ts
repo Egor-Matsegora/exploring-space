@@ -4,18 +4,13 @@ import { THomeState } from '@/store/modules/home/types';
 import { MOCK_MAIN_SLIDER_DATA } from '../../fixtures/main-slider-data.fixtures';
 
 describe('Home store module mutations', () => {
-  let initialState: THomeState;
+  const initialState: THomeState = {
+    mainSliderLoading: false,
+    mainSliderData: [],
+    error: null,
+  };
 
   const MOCK_ERROR = new Error('this is a mock error');
-
-  beforeEach(
-    () =>
-      (initialState = {
-        mainSliderLoading: false,
-        mainSliderData: [],
-        error: null,
-      })
-  );
 
   it('[homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER] should mutate loading flag in state', () => {
     mutations[homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER](initialState);
@@ -30,11 +25,11 @@ describe('Home store module mutations', () => {
       error: MOCK_ERROR,
     };
 
-    mutations[homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER_SUCCESS](initialState, MOCK_DATA);
+    mutations[homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER_SUCCESS](MOCK_STATE_WITH_ERROR, MOCK_DATA);
 
-    expect(initialState.mainSliderLoading).toBeFalsy();
-    expect(initialState.mainSliderData).toBe(MOCK_DATA);
-    expect(initialState.error).toBeNull();
+    expect(MOCK_STATE_WITH_ERROR.mainSliderLoading).toBeFalsy();
+    expect(MOCK_STATE_WITH_ERROR.mainSliderData).toBe(MOCK_DATA);
+    expect(MOCK_STATE_WITH_ERROR.error).toBeNull();
   });
 
   it('[homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER_ERROR]', () => {

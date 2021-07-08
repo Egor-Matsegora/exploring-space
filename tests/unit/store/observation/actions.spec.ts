@@ -1,7 +1,4 @@
-import { TObservationImageResponse } from './../../../../src/store/modules/observation/types/index';
-import { AjaxResponse } from 'rxjs/ajax';
 import { api } from '@/api';
-import { Observer, Subscription } from 'rxjs';
 import { RootMutationTypes } from '@/store/mutations/mutation-types';
 import { actions } from '@/store/modules/observation/actions';
 import { observationMutationTypes } from '@/store/modules/observation/mutations/mutation-types';

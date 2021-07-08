@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import { Subscription, Unsubscribable } from 'rxjs';
 import { TRootState } from '@/store/types';
 import { actions } from '@/store/actions';
+import { mutations } from '@/store/mutations';
 
 describe('Root Store actions', () => {
   it('[Root Store actions unsubscribeAll] should unsubscribe for all subscriptions', () => {
@@ -13,6 +14,7 @@ describe('Root Store actions', () => {
     };
     const store = new Vuex.Store({
       actions,
+      mutations,
       state: INITIAL_ROOT_STATE,
     });
 

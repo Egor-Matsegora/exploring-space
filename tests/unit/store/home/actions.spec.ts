@@ -6,6 +6,7 @@ import { homeStoreMutationTypes } from '@/store/modules/home/mutations/mutation-
 import { TRootState } from '@/store/types/index';
 import { MOCK_MAIN_SLIDER_DATA } from '../../fixtures/main-slider-data.fixtures';
 import { mockApiHelper } from '../../helpers/api.helper';
+import { spyLocalStorageHelper } from '../../helpers/spy-local-storage.helper';
 
 describe('Home Store module actions', () => {
   describe('[Home Store fetchMainSliderDataWithStorage]', () => {
@@ -20,7 +21,7 @@ describe('Home Store module actions', () => {
     });
 
     it('should commit homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER_SUCCESS mutation if localstorage has mai slider data for current date', async () => {
-      jest.spyOn(window.localStorage.__proto__, 'getItem').mockReturnValue(JSON.stringify(MOCK_MAIN_SLIDER_DATA));
+      spyLocalStorageHelper('getItem', MOCK_MAIN_SLIDER_DATA);
 
       const data = await action({ commit, dispatch });
 
@@ -30,8 +31,8 @@ describe('Home Store module actions', () => {
 
     it(`[Home Store fetchMainSliderDataWithStorage]
       should dispatch fetchMainSliderData action and clear storage if localstorage has no main slider data for current date`, async () => {
-      jest.spyOn(window.localStorage.__proto__, 'getItem').mockReturnValue(null);
-      jest.spyOn(window.localStorage.__proto__, 'clear');
+      spyLocalStorageHelper('getItem');
+      spyLocalStorageHelper('clear');
       jest.spyOn(dayjs(), 'format').mockReturnValue('');
 
       await action({ commit, dispatch });
@@ -54,7 +55,7 @@ describe('Home Store module actions', () => {
 
     it('should commit mutations for main slider data succes', async () => {
       mockApiHelper('getDataForMainSlider', MOCK_MAIN_SLIDER_DATA);
-      jest.spyOn(window.localStorage.__proto__, 'setItem');
+      spyLocalStorageHelper('setItem');
 
       const data = await action({ commit, rootState });
 

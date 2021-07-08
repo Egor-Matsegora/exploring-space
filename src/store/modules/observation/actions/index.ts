@@ -7,12 +7,10 @@ import { TObservationState, TObservationImageResponse } from './../types';
 import { observationMutationTypes } from '../mutations/mutation-types';
 import { IObservationImageFormData } from '@/views/Observation/interfaces/ObservationImageFormDataInterface';
 import { AjaxError, AjaxResponse } from 'rxjs/ajax';
+import { RootMutationTypes } from '@/store/mutations/mutation-types';
 
 export const actions: ActionTree<TObservationState, TRootState> = {
-  fetchObservationImage(
-    { commit, rootState },
-    imageFormData: IObservationImageFormData
-  ): Promise<TObservationImageResponse> {
+  fetchObservationImage({ commit }, imageFormData: IObservationImageFormData): Promise<TObservationImageResponse> {
     commit(observationMutationTypes.FETCH_OBSERVATION_IMAGE);
 
     return new Promise((resolve) => {
@@ -31,7 +29,7 @@ export const actions: ActionTree<TObservationState, TRootState> = {
       const subscription: Unsubscribable = api
         .getObservationImageData<TObservationImageResponse>(imageFormData)
         .subscribe(observer as Observer<AjaxResponse<TObservationImageResponse>>);
-      rootState.subscriptions.push(subscription);
+      commit(RootMutationTypes.ADD_SUBSCRIPTION, subscription);
     });
   },
 };

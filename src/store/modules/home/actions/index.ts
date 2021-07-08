@@ -1,3 +1,4 @@
+import { RootMutationTypes } from './../../../mutations/mutation-types';
 import { ActionTree } from 'vuex';
 import { Observer } from 'rxjs';
 import dayjs from 'dayjs';
@@ -10,16 +11,14 @@ import { TMainSliderResponse } from '../types/index';
 import { THomeState } from '../types';
 
 export const actions: ActionTree<THomeState, TRootState> = {
-  fetchMainSliderData({ commit, rootState }, dateNow?: string): Promise<TMainSliderResponse> {
+  fetchMainSliderData({ commit }, dateNow: string = dayjs().format('YYYY-MM-DD')): Promise<TMainSliderResponse> {
     commit(homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER);
-
-    const defaultDate = dateNow || dayjs().format('YYYY-MM-DD');
 
     return new Promise((resolve, reject) => {
       const observer: Partial<Observer<TMainSliderResponse>> = {
         next(res: TMainSliderResponse) {
           commit(homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER_SUCCESS, res);
-          localStorage.setItem(defaultDate, JSON.stringify(res));
+          localStorage.setItem(dateNow, JSON.stringify(res));
           resolve(res);
         },
         error(err) {
@@ -32,7 +31,7 @@ export const actions: ActionTree<THomeState, TRootState> = {
       const subscription = api
         .getDataForMainSlider<TMainSliderResponse>()
         .subscribe(observer as Observer<TMainSliderResponse>);
-      rootState.subscriptions.push(subscription);
+      commit(RootMutationTypes.ADD_SUBSCRIPTION, subscription);
     });
   },
 

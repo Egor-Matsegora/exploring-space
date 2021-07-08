@@ -11,9 +11,10 @@ import { roversMutationTypesEnum } from '../mutations/mutation-types';
 import { TRootState } from '@/store/types';
 import { TRoversState } from '../types';
 import { IRoverPhotosResponse } from '@/views/Rovers/interfaces/rover-photos-response';
+import { RootMutationTypes } from '@/store/mutations/mutation-types';
 
 export const actions: ActionTree<TRoversState, TRootState> = {
-  fetchRoverManifest({ commit, state, rootState }): Promise<IRoverManifest | unknown> {
+  fetchRoverManifest({ commit, state }): Promise<IRoverManifest | unknown> {
     commit(roversMutationTypesEnum.FILL_ROVER_MANIFEST);
 
     return new Promise((resolve, reject) => {
@@ -31,9 +32,10 @@ export const actions: ActionTree<TRoversState, TRootState> = {
       const subscription: Unsubscribable = api
         .getActiveRoverManifest<IRoverManifest>(state.activeRover)
         .subscribe(observer as Observer<IRoverManifest>);
-      rootState.subscriptions.push(subscription);
+      commit(RootMutationTypes.ADD_SUBSCRIPTION, subscription);
     });
   },
+
   fetchRoverManifestWithStorage({ dispatch, commit, state }): Promise<IRoverManifest | unknown> {
     const prevDate = dayjs().subtract(1, 'day').millisecond(0).second(0).second(0).minute(0).hour(0).valueOf();
 
@@ -53,7 +55,8 @@ export const actions: ActionTree<TRoversState, TRootState> = {
 
     return dispatch('fetchRoverManifest');
   },
-  fetchRoverPhotos({ commit, rootState }, data: IRoverFormData): Promise<IRoverPhoto[]> {
+
+  fetchRoverPhotos({ commit }, data: IRoverFormData): Promise<IRoverPhoto[]> {
     commit(roversMutationTypesEnum.FILL_ROVER_IMAGES);
 
     return new Promise((resolve, reject) => {
@@ -71,7 +74,7 @@ export const actions: ActionTree<TRoversState, TRootState> = {
       const subscription: Unsubscribable = api
         .getRoverPhotos<IRoverPhotosResponse>(data)
         .subscribe(observer as Observer<IRoverPhotosResponse>);
-      rootState.subscriptions.push(subscription);
+      commit(RootMutationTypes.ADD_SUBSCRIPTION, subscription);
     });
   },
 };

@@ -1,8 +1,8 @@
-import { of, throwError } from 'rxjs';
 import dayjs from 'dayjs';
 import { api } from '@/api';
 import { actions } from '@/store/modules/home/actions';
 import { homeStoreMutationTypes } from '@/store/modules/home/mutations/mutation-types';
+import { RootMutationTypes } from '@/store/mutations/mutation-types';
 import { TRootState } from '@/store/types/index';
 import { MOCK_MAIN_SLIDER_DATA } from '../../fixtures/main-slider-data.fixtures';
 import { mockApiHelper } from '../../helpers/api.helper';
@@ -47,6 +47,8 @@ describe('Home Store module actions', () => {
     let action: (a: any) => any;
     let commit: typeof jest.fn;
 
+    const getFakeSubscription = () => api.getDataForMainSlider().subscribe({} as any);
+
     beforeEach(() => {
       commit = jest.fn();
       rootState = { subscriptions: [] };
@@ -56,6 +58,7 @@ describe('Home Store module actions', () => {
     it('should commit mutations for main slider data succes', async () => {
       mockApiHelper('getDataForMainSlider', MOCK_MAIN_SLIDER_DATA);
       spyLocalStorageHelper('setItem');
+      const MOCK_SUBSCRIPTION = getFakeSubscription();
 
       const data = await action({ commit, rootState });
 
@@ -70,12 +73,14 @@ describe('Home Store module actions', () => {
         homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER_SUCCESS,
         MOCK_MAIN_SLIDER_DATA
       );
+      expect(commit).toHaveBeenNthCalledWith(3, RootMutationTypes.ADD_SUBSCRIPTION, MOCK_SUBSCRIPTION);
     });
 
     it('should commit mutations for main slider data error', async () => {
       const MOCKED_ERROR = new Error('it is a mocked error');
       mockApiHelper('getDataForMainSlider', MOCKED_ERROR, true);
-      jest.spyOn(window.localStorage.__proto__, 'setItem');
+      spyLocalStorageHelper('setItem');
+      const MOCK_SUBSCRIPTION = getFakeSubscription();
 
       try {
         await action({ commit, rootState });
@@ -84,6 +89,7 @@ describe('Home Store module actions', () => {
       } catch (error) {
         expect(commit).toHaveBeenNthCalledWith(1, homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER);
         expect(commit).toHaveBeenNthCalledWith(2, homeStoreMutationTypes.GET_DATA_FOR_MAIN_SLIDER_ERROR, MOCKED_ERROR);
+        expect(commit).toHaveBeenNthCalledWith(3, RootMutationTypes.ADD_SUBSCRIPTION, MOCK_SUBSCRIPTION);
       }
     });
   });

@@ -87,7 +87,7 @@ describe('Rovers Store Module actions', () => {
       expect(commit).toHaveBeenNthCalledWith(3, RootMutationTypes.ADD_SUBSCRIPTION, fakeSubscription);
     });
 
-    it('should commit succes mutations', async () => {
+    it('should commit error mutations', async () => {
       mockApiHelper('getActiveRoverManifest', MOCKED_ERROR, true);
       const fakeSubscription = gatFakeSubscription();
 
@@ -100,8 +100,40 @@ describe('Rovers Store Module actions', () => {
   });
 
   describe('[fetchRoverPhotos]', () => {
-    it.todo('should commit succes mutations');
-    it.todo('should commit error mutations');
+    const action = actions.fetchRoverPhotos as (a: any) => any;
+    const fakeData = {
+      date: 'fake-date',
+      camera: 'fake-camera ',
+      roverName: 'fake-rover',
+    };
+    const getFakeSubscription = () => api.getRoverPhotos(fakeData).subscribe({} as any);
+
+    it('should commit succes mutations', async () => {
+      mockApiHelper('getRoverPhotos', ROVER_IMAGES_FIXTURE);
+      const fakeSubscription = getFakeSubscription();
+
+      const data = await action({ commit, state });
+
+      expect(data).toStrictEqual(ROVER_IMAGES_FIXTURE.photos);
+      expect(commit).toHaveBeenNthCalledWith(1, roversMutationTypesEnum.FILL_ROVER_IMAGES);
+      expect(commit).toHaveBeenNthCalledWith(
+        2,
+        roversMutationTypesEnum.FILL_ROVER_IMAGES_SUCCESS,
+        ROVER_IMAGES_FIXTURE.photos
+      );
+      expect(commit).toHaveBeenNthCalledWith(3, RootMutationTypes.ADD_SUBSCRIPTION, fakeSubscription);
+    });
+
+    it('should commit error mutations', () => {
+      mockApiHelper('getRoverPhotos', MOCKED_ERROR, true);
+      const fakeSubscription = getFakeSubscription();
+
+      action({ commit, state });
+
+      expect(commit).toHaveBeenNthCalledWith(1, roversMutationTypesEnum.FILL_ROVER_IMAGES);
+      expect(commit).toHaveBeenNthCalledWith(2, roversMutationTypesEnum.FILL_ROVER_IMAGES_ERROR, MOCKED_ERROR);
+      expect(commit).toHaveBeenNthCalledWith(3, RootMutationTypes.ADD_SUBSCRIPTION, fakeSubscription);
+    });
   });
 
   afterEach(() => {

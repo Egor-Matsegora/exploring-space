@@ -84,7 +84,6 @@ describe('HomeView', () => {
     setSwiperData();
 
     await wrapper.vm.$nextTick();
-    console.log(wrapper.vm.$options.methods);
 
     const swiper = wrapper.findComponent(Swiper);
     const slides = wrapper.findAllComponents(SwiperSlide).wrappers;
@@ -103,13 +102,11 @@ describe('HomeView', () => {
     setSliderLoading(true);
     await wrapper.vm.$nextTick();
     expect(clearSliderInterval).toHaveBeenCalled();
-    // expect(startSliderInterval).not.toHaveBeenCalled();
 
     setSliderLoading(false);
     await wrapper.vm.$nextTick();
 
     expect(startSliderInterval).toHaveBeenCalled();
-    // expect(clearSliderInterval).not.toHaveBeenCalled();
   });
 
   afterEach(() => {

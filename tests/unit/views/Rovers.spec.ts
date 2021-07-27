@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { VueConstructor } from 'vue/types/umd';
-import Router, { Route } from 'vue-router';
+import Router from 'vue-router';
 import Vuex, { Store } from 'vuex';
 import { cloneDeep } from 'lodash';
 import { Wrapper, createLocalVue, shallowMount } from '@vue/test-utils';

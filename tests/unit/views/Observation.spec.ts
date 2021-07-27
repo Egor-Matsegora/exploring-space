@@ -9,7 +9,7 @@ import { VueConstructor } from 'vue/types/umd';
 
 describe('Observation view', () => {
   let wrapper: Wrapper<Vue>;
-  let localVue: VueConstructor<Observation> | null;
+  let localVue: VueConstructor<any> | null;
   let mockStore: Store<any> | null;
   const mockImageData = 'test/url';
   const mockNotExistsMessage = 'test message';

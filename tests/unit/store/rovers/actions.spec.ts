@@ -136,6 +136,15 @@ describe('Rovers Store Module actions', () => {
     });
   });
 
+  describe('set active rover actoion', () => {
+    it('should commit set active rover mutation', () => {
+      const action = actions.setActiveRover as any;
+      const mockRover = 'test-rover';
+      action({ commit }, mockRover);
+      expect(commit).toHaveBeenCalledWith(roversMutationTypesEnum.SET_ACTIVE_ROVER, mockRover);
+    });
+  });
+
   afterEach(() => {
     commit = null;
     dispatch = null;

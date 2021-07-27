@@ -77,4 +77,8 @@ export const actions: ActionTree<TRoversState, TRootState> = {
       commit(RootMutationTypes.ADD_SUBSCRIPTION, subscription);
     });
   },
+
+  setActiveRover({ commit }, rover: string) {
+    commit(roversMutationTypesEnum.SET_ACTIVE_ROVER, rover);
+  },
 };

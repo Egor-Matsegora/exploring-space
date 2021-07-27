@@ -42,12 +42,15 @@ export default Vue.extend({
     ...mapActions(['fetchMainSliderDataWithStorage', 'fetchMainSliderData']),
     setIntervalForSwiperAutoplay(): void {
       if (!this.mainSliderLoading) {
-        this.intervalId = setInterval(() => {
-          this.$refs.swiperRef && (this.$refs.swiperRef as any).$swiper.slideNext(1700);
-        }, this.swiperInterval);
+        this.startSliderInterval();
       } else {
         this.clearSliderInterval();
       }
+    },
+    startSliderInterval(): void {
+      this.intervalId = setInterval(() => {
+        this.$refs.swiperRef && (this.$refs.swiperRef as any).$swiper.slideNext(1700);
+      }, this.swiperInterval);
     },
     clearSliderInterval(): void {
       this.intervalId && clearInterval(this.intervalId);

@@ -50,13 +50,13 @@ export default Vue.extend({
       notExistsMessage(state: TRootState): string | null | void {
         return (state.observation as TObservationState).notExistsMessage;
       },
-      maxDate() {
-        const date: Date = new Date();
-        const month = date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1;
-        const day = date.getDate().toString().length === 1 ? '0' + date.getDate() : date.getDate();
-        return `${date.getUTCFullYear()}-${month}-${day}`;
-      },
     }),
+    maxDate() {
+      const date: Date = new Date();
+      const month = date.getMonth() < 9 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1;
+      const day = date.getDate().toString().length === 1 ? '0' + date.getDate() : date.getDate();
+      return `${date.getUTCFullYear()}-${month}-${day}`;
+    },
   },
   methods: {
     ...mapActions(['fetchObservationImage']),

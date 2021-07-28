@@ -4,7 +4,7 @@
       <loader />
     </div>
   </div>
-  <div class="r-form__content" v-else>
+  <div class="r-form__content" v-if="!loading && roverManifest">
     <h1 class="r-form__name">
       {{ roverManifest.photo_manifest.name }} rover
     </h1>
@@ -80,7 +80,11 @@
       </div>
 
       <div class="r-form__field">
-        <ui-button type="submit" class="r-form__submit" :disabled="photosLoading">
+        <ui-button
+          type="submit"
+          class="r-form__submit"
+          :disabled="photosLoading"
+        >
           find photos
         </ui-button>
       </div>
